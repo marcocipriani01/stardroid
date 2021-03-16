@@ -40,7 +40,7 @@ public class ApplicationConstants {
     //public static final String HEMISPHERE_SOUTHERN = "hemisphere_southern";
     public static final String POLARIS_RETICLE_PREF = "polaris_hr_reticle";
     public static final String RETICLE_SKY_WATCHER = "reticle_skywatcher";
-    //public static final String RETICLE_BIG_DIPPER = "reticle_big_dipper";
+    public static final String RETICLE_BIG_DIPPER = "reticle_big_dipper";
     public static final String MAGNETIC_DECLINATION_PREF = "use_magnetic_correction";
     public static final String NO_AUTO_LOCATE_PREF = "no_auto_locate";
     public static final String FORCE_GPS_PREF = "force_gps";

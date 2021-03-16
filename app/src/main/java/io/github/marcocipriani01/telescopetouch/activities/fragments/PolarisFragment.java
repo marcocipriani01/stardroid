@@ -64,8 +64,8 @@ public class PolarisFragment extends ActionFragment {
             hourAngleText.setText(String.format(context.getString(R.string.hour_angle), polaris.getHourAngleString()));
             spotText.setText(String.format(context.getString(R.string.in_finder), context.getString(polaris.getStarName()), polaris.getScopePositionString()));
             float rotation = polaris.getScopePosition();
-            if (reticle.equals("1"))
-                rotation = (rotation + 90.0f) % 90.0f;
+            if (ApplicationConstants.RETICLE_BIG_DIPPER.equals(reticle))
+                rotation = (rotation + 90.0f) % 360.0f;
             Animation animation = new RotateAnimation(lastRotation, rotation,
                     Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
             animation.setDuration(500);
