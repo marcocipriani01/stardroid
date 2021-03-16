@@ -445,11 +445,13 @@ public class INDICamera implements INDIPropertyListener, Parcelable {
             stream = resolver.openOutputStream(uri);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (context.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                synchronized (listeners) {
-                    for (CameraListener listener : listeners) {
-                        listener.onRequestStoragePermission();
+                uiHandler.post(() -> {
+                    synchronized (listeners) {
+                        for (CameraListener listener : listeners) {
+                            listener.onRequestStoragePermission();
+                        }
                     }
-                }
+                });
                 return null;
             }
             File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + File.separator + folderName);
@@ -873,11 +875,13 @@ public class INDICamera implements INDIPropertyListener, Parcelable {
             default:
                 return;
         }
-        synchronized (listeners) {
-            for (CameraListener listener : listeners) {
-                listener.onCameraFunctionsChange();
+        uiHandler.post(() -> {
+            synchronized (listeners) {
+                for (CameraListener listener : listeners) {
+                    listener.onCameraFunctionsChange();
+                }
             }
-        }
+        });
     }
 
     public synchronized boolean removeProp(INDIProperty<?> property) {
@@ -934,11 +938,13 @@ public class INDICamera implements INDIPropertyListener, Parcelable {
             default:
                 return false;
         }
-        synchronized (listeners) {
-            for (CameraListener listener : listeners) {
-                listener.onCameraFunctionsChange();
+        uiHandler.post(() -> {
+            synchronized (listeners) {
+                for (CameraListener listener : listeners) {
+                    listener.onCameraFunctionsChange();
+                }
             }
-        }
+        });
         return (blobP == null) && (exposureP == null) && (exposurePresetsP == null) &&
                 (abortP == null) && (binningP == null) && (isoP == null) &&
                 (forceBulbP == null) && (gainP == null);
@@ -990,17 +996,15 @@ public class INDICamera implements INDIPropertyListener, Parcelable {
     }
 
     public void freeMemory() {
-        uiHandler.post(() -> {
-            synchronized (listeners) {
-                for (CameraListener listener : listeners) {
-                    listener.onBitmapDestroy();
-                }
+        synchronized (listeners) {
+            for (CameraListener listener : listeners) {
+                listener.onBitmapDestroy();
             }
-            if (lastBitmap != null) {
-                lastBitmap.recycle();
-                lastBitmap = null;
-            }
-        });
+        }
+        if (lastBitmap != null) {
+            lastBitmap.recycle();
+            lastBitmap = null;
+        }
     }
 
     public synchronized void reloadBitmap() {
