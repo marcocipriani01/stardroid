@@ -382,7 +382,7 @@ public class CameraFragment extends ActionFragment implements INDICamera.CameraL
                 camera.capture(str);
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage(), e);
-                requestActionSnack(context.getString(R.string.error) + " " + e.getLocalizedMessage());
+                onCameraError(e);
             }
         }
     }
@@ -398,7 +398,7 @@ public class CameraFragment extends ActionFragment implements INDICamera.CameraL
                 camera.abort();
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage(), e);
-                requestActionSnack(context.getString(R.string.error) + " " + e.getLocalizedMessage());
+                onCameraError(e);
             }
         }
     }
@@ -474,7 +474,7 @@ public class CameraFragment extends ActionFragment implements INDICamera.CameraL
                 camera.startCaptureLoop(exposureTimeField.getText().toString(), (int) countSlider.getValue());
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage(), e);
-                requestActionSnack(context.getString(R.string.error) + " " + e.getLocalizedMessage());
+                onCameraError(e);
                 onCameraLoopStop();
             }
         }
@@ -923,7 +923,12 @@ public class CameraFragment extends ActionFragment implements INDICamera.CameraL
 
     @Override
     public void onCameraError(Throwable e) {
-        requestActionSnack(context.getString(R.string.error) + " " + e.getLocalizedMessage());
+        String message = e.getLocalizedMessage();
+        if ((message == null) || message.equals("?")) {
+            requestActionSnack(context.getString(R.string.unknown_exception));
+        } else {
+            requestActionSnack(context.getString(R.string.error) + " " + message);
+        }
     }
 
     @Override

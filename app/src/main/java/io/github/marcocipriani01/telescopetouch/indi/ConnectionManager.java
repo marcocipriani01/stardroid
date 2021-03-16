@@ -218,7 +218,12 @@ public class ConnectionManager implements INDIServerConnectionListener, INDIDevi
     }
 
     public void log(Exception e) {
-        log(resources.getString(R.string.error) + " " + e.getLocalizedMessage());
+        String message = e.getLocalizedMessage();
+        if ((message == null) || message.equals("?")) {
+            log(resources.getString(R.string.unknown_exception));
+        } else {
+            log(resources.getString(R.string.error) + " " + message);
+        }
     }
 
     /**
