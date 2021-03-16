@@ -10,7 +10,7 @@
             android:defaultValue="0"
             android:entries="@array/exit_action_pref"
             android:entryValues="@array/exit_action_pref_values"
-            android:key="exit_action"
+            android:key="app_exit_action"
             android:summary="%s"
             android:title="@string/exit_action"
             app:iconSpaceReserved="false" />
@@ -125,7 +125,7 @@
             android:defaultValue="0"
             android:entries="@array/hemisphere_pref"
             android:entryValues="@array/hemisphere_pref_values"
-            android:key="polaris_hemisphere_selection"
+            android:key="polaris_hemisphere"
             android:summary="@string/hemisphere_description"
             android:title="@string/hemisphere"
             app:iconSpaceReserved="false" />
@@ -134,7 +134,7 @@
             android:defaultValue="0"
             android:entries="@array/reticle_pref"
             android:entryValues="@array/reticle_pref_values"
-            android:key="polaris_reticle"
+            android:key="polaris_finder_reticle"
             android:summary="%s"
             android:title="@string/polaris_finder_reticle"
             app:iconSpaceReserved="false" />

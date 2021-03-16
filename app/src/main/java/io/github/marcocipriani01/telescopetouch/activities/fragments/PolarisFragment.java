@@ -116,12 +116,12 @@ public class PolarisFragment extends ActionFragment {
 
     @Override
     public void onResume() {
-        String hemisphere = preferences.getString(ApplicationConstants.POLARIS_HEMISPHERE_PREF, "0");
-        if (hemisphere.equals("0")) {
+        String hemisphere = preferences.getString(ApplicationConstants.POLARIS_HEMISPHERE_PREF, ApplicationConstants.HEMISPHERE_AUTO);
+        if (ApplicationConstants.HEMISPHERE_AUTO.equals(hemisphere)) {
             polaris.setAutoHemisphereDetection(true);
         } else {
             polaris.setAutoHemisphereDetection(false);
-            polaris.setNorthernHemisphere(hemisphere.equals("1"));
+            polaris.setNorthernHemisphere(ApplicationConstants.HEMISPHERE_NORTHERN.equals(hemisphere));
         }
         setReticle();
         locationHelper.start();
@@ -136,8 +136,8 @@ public class PolarisFragment extends ActionFragment {
     }
 
     private void setReticle() {
-        reticle = preferences.getString(ApplicationConstants.POLARIS_RETICLE_PREF, "0");
-        if (reticle.equals("0")) {
+        reticle = preferences.getString(ApplicationConstants.POLARIS_RETICLE_PREF, ApplicationConstants.RETICLE_SKY_WATCHER);
+        if (ApplicationConstants.RETICLE_SKY_WATCHER.equals(reticle)) {
             rotatingImage.setImageResource(R.drawable.polaris_crosshair);
             stillImage.setImageResource(R.drawable.reticle_skywatcher);
         } else {

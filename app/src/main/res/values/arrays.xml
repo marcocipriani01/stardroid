@@ -19,17 +19,17 @@
         <item>@string/hemisphere_southern</item>
     </string-array>
     <string-array name="hemisphere_pref_values">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
+        <item>hemisphere_auto</item>
+        <item>hemisphere_northern</item>
+        <item>hemisphere_southern</item>
     </string-array>
     <string-array name="reticle_pref">
         <item>@string/reticle_skywatcher</item>
         <item>@string/reticle_big_dipper</item>
     </string-array>
     <string-array name="reticle_pref_values">
-        <item>0</item>
-        <item>1</item>
+        <item>reticle_skywatcher</item>
+        <item>reticle_big_dipper</item>
     </string-array>
     <string-array name="exit_action_pref">
         <item>@string/do_nothing</item>
@@ -38,9 +38,9 @@
         <item>@string/disconnect_and_exit</item>
     </string-array>
     <string-array name="exit_action_pref_values">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
+        <item>do_nothing</item>
+        <item>background_always</item>
+        <item>background_if_connected</item>
+        <item>disconnect_and_exit</item>
     </string-array>
 </resources>

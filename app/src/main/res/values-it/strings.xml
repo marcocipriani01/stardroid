@@ -681,4 +681,7 @@
     <string name="high_refresh_rate_summary">Ricarica la mappa stellare a 60Hz. Consuma più batteria, ma fornisce un\'esperieza superiore.</string>
     <string name="sky_map_settings">Impostazioni mappa stellare</string>
     <string name="high_refresh_rate_message">La modalità ad alta frequenza di aggiornamento è ora disponibile! Ricarica la mappa stellare a 60Hz, per un\'esperienza superiore!</string>
+    <string name="ccd_capture_notification">Cattura CCD</string>
+    <string name="capture_in_progress">Cattura in corso</string>
+    <string name="stop_capture">Ferma</string>
 </resources>

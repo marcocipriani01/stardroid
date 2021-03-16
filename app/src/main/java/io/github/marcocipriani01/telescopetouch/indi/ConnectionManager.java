@@ -129,6 +129,46 @@ public class ConnectionManager implements INDIServerConnectionListener, INDIDevi
         indiHandler = new Handler(indiThread.getLooper());
     }
 
+    public void terminate() {
+        indiHandler.post(() -> {
+            synchronized (managerListeners) {
+                managerListeners.clear();
+            }
+            if ((indiConnection != null) && indiConnection.isConnected()) {
+                clearTelescopeVars();
+                synchronized (indiCameras) {
+                    for (INDICamera camera : indiCameras.values()) {
+                        camera.terminate();
+                    }
+                    indiCameras.clear();
+                }
+                indiConnection.removeINDIServerConnectionListener(this);
+                synchronized (indiListeners) {
+                    for (INDIServerConnectionListener l : indiListeners) {
+                        indiConnection.removeINDIServerConnectionListener(l);
+                    }
+                    indiListeners.clear();
+                }
+                try {
+                    indiConnection.disconnect();
+                } catch (Exception e) {
+                    Log.e(TAG, e.getMessage(), e);
+                }
+            } else {
+                synchronized (indiListeners) {
+                    indiListeners.clear();
+                }
+            }
+            this.indiConnection = null;
+            this.context = null;
+            this.resources = null;
+            this.dateFormat = null;
+            this.timeFormat = null;
+            this.preferences = null;
+            indiThread.quit();
+        });
+    }
+
     public State getState() {
         return busy ? State.BUSY :
                 (((indiConnection != null) && indiConnection.isConnected()) ? State.CONNECTED : State.DISCONNECTED);
@@ -340,6 +380,9 @@ public class ConnectionManager implements INDIServerConnectionListener, INDIDevi
         this.indiConnection = null;
         clearTelescopeVars();
         synchronized (indiCameras) {
+            for (INDICamera camera : indiCameras.values()) {
+                camera.terminate();
+            }
             indiCameras.clear();
         }
         log(resources.getString(R.string.connection_lost));

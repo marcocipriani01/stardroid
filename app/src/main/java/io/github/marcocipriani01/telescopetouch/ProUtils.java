@@ -38,12 +38,11 @@ public class ProUtils {
 
     public static final String PRO_ID = "io.github.marcocipriani01.telescopetouchpro";
     public static final String PRO_MESSAGE_PREF = "pro_message_1";
+    public static final int MAX_CAPTURES = 3;
     public static final String[] PRO_PREFERENCES = {
             NSD_PREF, EXIT_ACTION_PREF, POLARIS_HEMISPHERE_PREF, POLARIS_RETICLE_PREF, SKY_MAP_HIGH_REFRESH_PREF
     };
     public static final String CAPTURE_PRO_COUNTER = "capture_pro_counter";
-    private static final boolean ENABLE_PRO_CHECK = true;
-    private static final boolean DUMMY_PRO_VERSION = true;
     public static boolean isPro = false;
 
     public static void maybeProVersionDialog(SharedPreferences preferences, Context context) {
@@ -58,15 +57,11 @@ public class ProUtils {
     }
 
     public static void update(Context context) {
-        if (ENABLE_PRO_CHECK) {
-            try {
-                context.getPackageManager().getApplicationInfo(PRO_ID, 0);
-                isPro = true;
-            } catch (PackageManager.NameNotFoundException e) {
-                isPro = false;
-            }
-        } else {
-            isPro = DUMMY_PRO_VERSION;
+        try {
+            context.getPackageManager().getApplicationInfo(PRO_ID, 0);
+            isPro = true;
+        } catch (PackageManager.NameNotFoundException e) {
+            isPro = false;
         }
     }
 

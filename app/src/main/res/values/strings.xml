@@ -681,4 +681,7 @@
     <string name="high_refresh_rate_summary">Run the Sky Map at 60Hz. Drains more battery, but looks super-cool!</string>
     <string name="sky_map_settings">Sky Map settings</string>
     <string name="high_refresh_rate_message">High refresh rate mode is here! Run the Sky Map at 60Hz, for a super-smooth experience!</string>
+    <string name="ccd_capture_notification">CCD capture</string>
+    <string name="capture_in_progress">CCD capture in progress</string>
+    <string name="stop_capture">Stop capture</string>
 </resources>

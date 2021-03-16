@@ -322,7 +322,7 @@ public class CameraFragment extends ActionFragment implements INDICamera.CameraL
         // PRO
         if (!ProUtils.isPro) {
             int count = preferences.getInt(ProUtils.CAPTURE_PRO_COUNTER, 0);
-            if (count >= 4) {
+            if (count >= ProUtils.MAX_CAPTURES) {
                 requestActionSnack(R.string.buy_pro_continue_capture);
                 synchronized (connectionManager.indiCameras) {
                     Collection<INDICamera> cameras = connectionManager.indiCameras.values();
@@ -407,7 +407,7 @@ public class CameraFragment extends ActionFragment implements INDICamera.CameraL
         // PRO
         if (!ProUtils.isPro) {
             int count = preferences.getInt(ProUtils.CAPTURE_PRO_COUNTER, 0);
-            if (count >= 4) {
+            if (count >= ProUtils.MAX_CAPTURES) {
                 requestActionSnack(R.string.buy_pro_continue_capture);
                 synchronized (connectionManager.indiCameras) {
                     Collection<INDICamera> cameras = connectionManager.indiCameras.values();

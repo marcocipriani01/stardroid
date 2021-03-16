@@ -62,9 +62,9 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.Objects;
 
 import io.github.marcocipriani01.telescopetouch.AppForegroundService;
-import io.github.marcocipriani01.telescopetouch.ApplicationConstants;
 import io.github.marcocipriani01.telescopetouch.ProUtils;
 import io.github.marcocipriani01.telescopetouch.R;
+import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
 import io.github.marcocipriani01.telescopetouch.activities.fragments.AboutFragment;
 import io.github.marcocipriani01.telescopetouch.activities.fragments.ActionFragment;
 import io.github.marcocipriani01.telescopetouch.activities.fragments.AladinFragment;
@@ -80,6 +80,11 @@ import io.github.marcocipriani01.telescopetouch.activities.fragments.PolarisFrag
 import io.github.marcocipriani01.telescopetouch.activities.util.DarkerModeManager;
 import io.github.marcocipriani01.telescopetouch.indi.ConnectionManager;
 
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ACTION_BACKGROUND_ALWAYS;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ACTION_BACKGROUND_IF_CONNECTED;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ACTION_DISCONNECT_EXIT;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ACTION_DO_NOTHING;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.EXIT_ACTION_PREF;
 import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
 
 /**
@@ -183,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (AppForegroundService.class.getName().equals(service.service.getClassName())) {
                 Intent intent = new Intent(this, AppForegroundService.class);
-                intent.setAction(AppForegroundService.ACTION_STOP_SERVICE);
+                intent.setAction(AppForegroundService.SERVICE_STOP);
                 ContextCompat.startForegroundService(this, intent);
                 return;
             }
@@ -193,9 +198,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (preferences.getString(ApplicationConstants.EXIT_ACTION_PREF, "0").equals("3") && connectionManager.isConnected()) {
-            connectionManager.disconnect();
-            Toast.makeText(this, R.string.disconnected, Toast.LENGTH_SHORT).show();
+        if (ACTION_DISCONNECT_EXIT.equals(preferences.getString(EXIT_ACTION_PREF, ACTION_DO_NOTHING))) {
+            if (connectionManager.isConnected())
+                Toast.makeText(this, R.string.disconnected, Toast.LENGTH_SHORT).show();
+            TelescopeTouchApp.terminateConnections();
         }
     }
 
@@ -203,10 +209,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onStop() {
         super.onStop();
         connectionManager.removeManagerListener(this);
-        String exitAction = preferences.getString(ApplicationConstants.EXIT_ACTION_PREF, "0");
-        if (exitAction.equals("1") || (exitAction.equals("2") && connectionManager.isConnected())) {
+        String exitAction = preferences.getString(EXIT_ACTION_PREF, ACTION_DO_NOTHING);
+        if (ACTION_BACKGROUND_ALWAYS.equals(exitAction) ||
+                (ACTION_BACKGROUND_IF_CONNECTED.equals(exitAction) && connectionManager.isConnected())) {
             Intent intent = new Intent(this, AppForegroundService.class);
-            intent.setAction(AppForegroundService.ACTION_START_SERVICE);
+            intent.setAction(AppForegroundService.SERVICE_START);
             ContextCompat.startForegroundService(this, intent);
         }
     }
@@ -326,8 +333,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (fragment instanceof ActionFragment) {
             ActionFragment actionFragment = (ActionFragment) fragment;
             actionFragment.setActionEnabledListener(this);
-            fab.setImageResource(actionFragment.getActionDrawable());
-            if (actionFragment.isActionEnabled()) {
+            int drawable = actionFragment.getActionDrawable();
+            if ((drawable != 0) && actionFragment.isActionEnabled()) {
+                fab.setImageResource(drawable);
                 fab.show();
             } else {
                 fab.hide();

@@ -48,9 +48,9 @@ public class CameraForegroundService extends Service
         implements INDICamera.CameraListener, ConnectionManager.ManagerListener {
 
     public static final String INDI_CAMERA_EXTRA = "indi_camera";
-    public static final String ACTION_START_SERVICE = "ACTION_START_SERVICE";
-    public static final String ACTION_STOP_SERVICE = "ACTION_STOP_SERVICE";
-    public static final String ACTION_STOP_CAPTURE = "ACTION_STOP_CAPTURE";
+    public static final String SERVICE_START = "service_start";
+    public static final String SERVICE_STOP = "service_stop";
+    public static final String SERVICE_ACTION_STOP_CAPTURE = "stop_capture";
     private static final String TAG = TelescopeTouchApp.getTag(CameraForegroundService.class);
     private static final String NOTIFICATION_CHANNEL = "CCD_CAPTURE_SERVICE";
     private final Handler handler = new Handler(Looper.getMainLooper());
@@ -62,7 +62,7 @@ public class CameraForegroundService extends Service
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null) {
             switch (intent.getAction()) {
-                case ACTION_START_SERVICE:
+                case SERVICE_START:
                     camera = intent.getParcelableExtra(INDI_CAMERA_EXTRA);
                     if (camera == null) {
                         Toast.makeText(this, R.string.no_camera_available, Toast.LENGTH_SHORT).show();
@@ -73,7 +73,7 @@ public class CameraForegroundService extends Service
                         start();
                     }
                     break;
-                case ACTION_STOP_CAPTURE:
+                case SERVICE_ACTION_STOP_CAPTURE:
                     try {
                         camera.abort();
                     } catch (INDIValueException e) {
@@ -82,7 +82,7 @@ public class CameraForegroundService extends Service
                     stopForeground(true);
                     stopSelf();
                     break;
-                case ACTION_STOP_SERVICE:
+                case SERVICE_STOP:
                     stopForeground(true);
                     stopSelf();
                     break;
@@ -94,7 +94,7 @@ public class CameraForegroundService extends Service
     private void start() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL,
-                    "CCD capture", NotificationManager.IMPORTANCE_NONE);
+                    getString(R.string.ccd_capture_notification), NotificationManager.IMPORTANCE_NONE);
             channel.setLightColor(getColor(R.color.colorPrimary));
             channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
             ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(channel);
@@ -103,7 +103,7 @@ public class CameraForegroundService extends Service
         builder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL);
         NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
         bigTextStyle.setBigContentTitle(camera.toString());
-        bigTextStyle.bigText("CCD capture in progress");
+        bigTextStyle.bigText(getString(R.string.capture_in_progress));
         builder.setStyle(bigTextStyle);
         builder.setWhen(System.currentTimeMillis());
         builder.setSmallIcon(R.drawable.ccd_capture);
@@ -116,9 +116,9 @@ public class CameraForegroundService extends Service
         builder.setContentIntent(stackBuilder.getPendingIntent(1, PendingIntent.FLAG_UPDATE_CURRENT));
 
         Intent stopLoopIntent = new Intent(this, CameraForegroundService.class);
-        stopLoopIntent.setAction(ACTION_STOP_CAPTURE);
+        stopLoopIntent.setAction(SERVICE_ACTION_STOP_CAPTURE);
         stopLoopIntent.putExtra(CameraForegroundService.INDI_CAMERA_EXTRA, camera);
-        builder.addAction(new NotificationCompat.Action(null, "Stop capture",
+        builder.addAction(new NotificationCompat.Action(null, getString(R.string.stop_capture),
                 PendingIntent.getService(this, 2, stopLoopIntent, PendingIntent.FLAG_UPDATE_CURRENT)));
 
         int totalCaptures = camera.getLoopTotalCaptures();

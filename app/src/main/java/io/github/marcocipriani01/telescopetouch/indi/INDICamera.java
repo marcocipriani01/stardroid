@@ -276,7 +276,7 @@ public class INDICamera implements INDIPropertyListener, Parcelable {
 
     private void startProgressNotification() {
         Intent intent = new Intent(context, CameraForegroundService.class);
-        intent.setAction(CameraForegroundService.ACTION_START_SERVICE);
+        intent.setAction(CameraForegroundService.SERVICE_START);
         intent.putExtra(CameraForegroundService.INDI_CAMERA_EXTRA, this);
         ContextCompat.startForegroundService(context, intent);
     }

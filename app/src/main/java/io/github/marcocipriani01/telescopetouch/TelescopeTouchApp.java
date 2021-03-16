@@ -43,6 +43,11 @@ public class TelescopeTouchApp extends Application {
         return ApplicationConstants.APP_NAME + "." + clazz.getSimpleName();
     }
 
+    public static void terminateConnections() {
+        if (nsdHelper != null) nsdHelper.terminate();
+        connectionManager.terminate();
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -52,12 +57,6 @@ public class TelescopeTouchApp extends Application {
         if ((nsdHelper == null) && PreferenceManager.getDefaultSharedPreferences(this)
                 .getBoolean(ApplicationConstants.NSD_PREF, false))
             nsdHelper = new NSDHelper(this);
-    }
-
-    @Override
-    public void onTerminate() {
-        if (nsdHelper != null) nsdHelper.terminate();
-        super.onTerminate();
     }
 
     public ApplicationComponent getApplicationComponent() {
