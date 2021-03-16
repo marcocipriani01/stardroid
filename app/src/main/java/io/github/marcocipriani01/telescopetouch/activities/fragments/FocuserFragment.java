@@ -99,7 +99,6 @@ public class FocuserFragment extends ActionFragment implements INDIServerConnect
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_focuser, container, false);
-        // Set up the UI
         inButton = rootView.findViewById(R.id.focus_in);
         outButton = rootView.findViewById(R.id.focus_out);
         speedUpButton = rootView.findViewById(R.id.focuser_faster);
