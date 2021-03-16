@@ -17,14 +17,11 @@
 package io.github.marcocipriani01.telescopetouch;
 
 import android.content.Context;
-import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
-import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.HashMap;
 
 import javax.jmdns.JmDNS;
@@ -41,47 +38,50 @@ public class NSDHelper implements ServiceListener {
     private boolean available = false;
     private NSDListener listener;
 
-    public NSDHelper(Context context) {
+    public void start(Context context) {
+        if (available) return;
         new Thread(() -> {
             try {
-                Log.i(TAG, "Starting Mutlicast Lock...");
+                available = false;
+                Log.i(TAG, "Starting Multicast Lock...");
                 WifiManager wifi = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-                multiCastLock = wifi.createMulticastLock(getClass().getName());
+                multiCastLock = wifi.createMulticastLock(TAG);
                 multiCastLock.setReferenceCounted(true);
                 multiCastLock.acquire();
                 Log.i(TAG, "Starting ZeroConf probe....");
-                jmdns = JmDNS.create(getDeviceIpAddress(wifi));
+                int address = wifi.getConnectionInfo().getIpAddress();
+                byte[] byteAddress = new byte[]{(byte) (address & 0xff), (byte) (address >> 8 & 0xff),
+                        (byte) (address >> 16 & 0xff), (byte) (address >> 24 & 0xff)};
+                jmdns = JmDNS.create(InetAddress.getByAddress(byteAddress));
                 jmdns.addServiceListener(SERVICE_TYPE, this);
                 available = true;
-            } catch (IOException e) {
+            } catch (Exception e) {
                 Log.e(TAG, e.getMessage(), e);
+                stop();
             }
         }).start();
-    }
-
-    private static InetAddress getDeviceIpAddress(WifiManager wifi) throws UnknownHostException {
-        WifiInfo wifiInfo = wifi.getConnectionInfo();
-        int address = wifiInfo.getIpAddress();
-        byte[] byteAddress = new byte[]{(byte) (address & 0xff), (byte) (address >> 8 & 0xff),
-                (byte) (address >> 16 & 0xff), (byte) (address >> 24 & 0xff)};
-        return InetAddress.getByAddress(byteAddress);
     }
 
     public boolean isAvailable() {
         return available;
     }
 
-    public void terminate() {
+    public void stop() {
+        Log.i(TAG, "Stopping NSD...");
         available = false;
         discoveredServices.clear();
         if (jmdns != null) {
-            jmdns.unregisterAllServices();
             try {
+                jmdns.unregisterAllServices();
                 jmdns.close();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 Log.e(TAG, e.getMessage(), e);
             }
             jmdns = null;
+        }
+        if (multiCastLock != null) {
+            multiCastLock.release();
+            multiCastLock = null;
         }
     }
 
@@ -95,19 +95,19 @@ public class NSDHelper implements ServiceListener {
 
     @Override
     public final void serviceAdded(ServiceEvent event) {
-        Log.d("ServiceDiscovery", "Service added: " + event.getInfo());
+        Log.d(TAG, "Service added: " + event.getInfo());
     }
 
     @Override
     public final void serviceRemoved(ServiceEvent event) {
-        Log.d("ServiceDiscovery", "Service lost: " + event.getInfo());
+        Log.d(TAG, "Service lost: " + event.getInfo());
         discoveredServices.remove(event.getName().replace("@", ""));
         if (listener != null) listener.onNSDChange();
     }
 
     @Override
     public final void serviceResolved(ServiceEvent event) {
-        Log.d("ServiceDiscovery", "Service resolved: " + event.getInfo());
+        Log.d(TAG, "Service resolved: " + event.getInfo());
         Inet4Address[] addresses = event.getInfo().getInet4Addresses();
         if (addresses.length > 0) {
             discoveredServices.put(event.getName(), addresses[0].getHostAddress());

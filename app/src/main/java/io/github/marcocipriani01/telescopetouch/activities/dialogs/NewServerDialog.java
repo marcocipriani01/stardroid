@@ -99,7 +99,10 @@ public class NewServerDialog {
                     lastDialog = null;
                 })
                 .setIcon(R.drawable.edit)
-                .setNegativeButton(android.R.string.cancel, (dialog, which) -> lastDialog = null).create();
+                .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                    inputMethodManager.hideSoftInputFromWindow(input.getWindowToken(), 0);
+                    lastDialog = null;
+                }).create();
         lastDialog.show();
         input.requestFocus();
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);

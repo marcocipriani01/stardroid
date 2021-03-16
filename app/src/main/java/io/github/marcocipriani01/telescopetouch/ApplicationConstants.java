@@ -34,11 +34,11 @@ public class ApplicationConstants {
     public static final String INDI_SERVERS_PREF = "INDI_SERVERS_PREF";
     public static final String INDI_PORT_PREF = "indi_port";
     public static final String NSD_PREF = "network_service_discovery";
-    public static final String POLARIS_HEMISPHERE_PREF = "polaris_hemisphere";
+    public static final String POLARIS_HEMISPHERE_PREF = "polaris_hr_hemisphere";
     public static final String HEMISPHERE_AUTO = "hemisphere_auto";
     public static final String HEMISPHERE_NORTHERN = "hemisphere_northern";
     //public static final String HEMISPHERE_SOUTHERN = "hemisphere_southern";
-    public static final String POLARIS_RETICLE_PREF = "polaris_finder_reticle";
+    public static final String POLARIS_RETICLE_PREF = "polaris_hr_reticle";
     public static final String RETICLE_SKY_WATCHER = "reticle_skywatcher";
     //public static final String RETICLE_BIG_DIPPER = "reticle_big_dipper";
     public static final String MAGNETIC_DECLINATION_PREF = "use_magnetic_correction";
@@ -56,7 +56,7 @@ public class ApplicationConstants {
     public static final String ALADIN_WELCOME = "aladin_welcome";
     public static final String ALADIN_J2000_NOTE = "aladin_j2000_note";
     public static final String VIZIER_WELCOME = "vizier_welcome";
-    public static final String EXIT_ACTION_PREF = "app_exit_action";
+    public static final String EXIT_ACTION_PREF = "on_exit_action";
     public static final String ACTION_DO_NOTHING = "do_nothing";
     public static final String ACTION_BACKGROUND_ALWAYS = "background_always";
     public static final String ACTION_BACKGROUND_IF_CONNECTED = "background_if_connected";

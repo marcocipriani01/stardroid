@@ -18,8 +18,6 @@ package io.github.marcocipriani01.telescopetouch;
 
 import android.app.Application;
 
-import androidx.preference.PreferenceManager;
-
 import io.github.marcocipriani01.telescopetouch.indi.ConnectionManager;
 
 /**
@@ -33,7 +31,7 @@ public class TelescopeTouchApp extends Application {
      * Global connection manager.
      */
     public static final ConnectionManager connectionManager = new ConnectionManager();
-    public static NSDHelper nsdHelper;
+    public static final NSDHelper nsdHelper = new NSDHelper();
     private ApplicationComponent component;
 
     /**
@@ -43,20 +41,12 @@ public class TelescopeTouchApp extends Application {
         return ApplicationConstants.APP_NAME + "." + clazz.getSimpleName();
     }
 
-    public static void terminateConnections() {
-        if (nsdHelper != null) nsdHelper.terminate();
-        connectionManager.terminate();
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
         component = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this)).build();
         connectionManager.init(this);
-        if ((nsdHelper == null) && PreferenceManager.getDefaultSharedPreferences(this)
-                .getBoolean(ApplicationConstants.NSD_PREF, false))
-            nsdHelper = new NSDHelper(this);
     }
 
     public ApplicationComponent getApplicationComponent() {

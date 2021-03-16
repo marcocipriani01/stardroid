@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:background="@color/colorPrimary"
+        android:id="@+id/connection_fragment_toolbar"
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.MaterialComponents.Dark"
         app:title="@string/app_name" />

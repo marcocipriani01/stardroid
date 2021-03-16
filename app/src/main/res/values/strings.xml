@@ -564,7 +564,7 @@
     <string name="hemisphere_auto">Automatic detection</string>
     <string name="hemisphere_northern">Northern (Polaris)</string>
     <string name="hemisphere_southern">Southern (Sigma Octantis)</string>
-    <string name="nsd_pref_description">Automatically discover Zeroconf network services. Requires restart.</string>
+    <string name="nsd_pref_description">Automatically discover Zeroconf network services.</string>
     <string name="nsd_pref">Network Service Discovery</string>
     <string name="polaris_finder_reticle">Polar finder reticle</string>
     <string name="reticle_skywatcher">New Sky-Watcher reticle</string>
@@ -597,8 +597,8 @@
     <string name="aladin_sky_atlas">Aladin Sky Atlas</string>
     <string name="dark_mode_not_supported">Cannot toggle dark mode in Aladin!</string>
     <string name="no_internet_connection">No internet connection!</string>
-    <string name="aladin_api_error">The Aladin Sky Atlas requires Android 6.0 or greater. You can still try running it in your browser.</string>
-    <string name="open">Open</string>
+    <string name="aladin_api_error">The Aladin Sky Atlas requires Android 6.0 or greater. You can still try running it in your browser, or enable the compatibility mode in the settings.</string>
+    <string name="open_in_settings">Open in browser</string>
     <string name="cds_copyright">© Centre de Données astronomiques de Strasbourg, Unistra/CNRS.</string>
     <string name="aladin_welcome">Aladin is an interactive sky atlas developed by the Strasbourg astronomical Data Center. It uses HiPS (Hierarchical Progressive Surveys) technology.\nTelescope.Touch integrates an Aladin client, so you can see your targets with extremely high quality before pointing the telescope! You can also slew the telescope from the map or search from objects, thanks to the Sesame object resolver.</string>
     <string name="vizier_catalogue_service">VizieR Catalogue Service</string>

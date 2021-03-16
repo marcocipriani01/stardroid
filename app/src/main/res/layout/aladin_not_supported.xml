@@ -50,6 +50,6 @@
             android:layout_below="@id/aladin_api_error"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:text="@string/open" />
+            android:text="@string/open_in_settings" />
     </RelativeLayout>
 </RelativeLayout>

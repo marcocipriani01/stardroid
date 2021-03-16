@@ -495,7 +495,7 @@
     <string name="hemisphere_auto">Rileva in automatico</string>
     <string name="hemisphere_northern">Boreale (Polaris)</string>
     <string name="hemisphere_southern">Australe (Sigma Octantis)</string>
-    <string name="nsd_pref_description">Ricerca in automatico servizi di rete Zeroconf. Richiede il riavvio.</string>
+    <string name="nsd_pref_description">Ricerca in automatico servizi di rete Zeroconf.</string>
     <string name="nsd_pref">Network Service Discovery</string>
     <string name="reticle_skywatcher">Reticolo Sky-Watcher nuovo</string>
     <string name="reticle_big_dipper">Grande Carro/Cassiopea</string>
@@ -534,8 +534,8 @@
     <string name="aladin_sky_atlas">Aladin Sky Atlas</string>
     <string name="dark_mode_not_supported">Impossibile cambiare modalità in Aladin!</string>
     <string name="no_internet_connection">Nessuna connessione ad internet!</string>
-    <string name="aladin_api_error">L\'atlante stellare Aladin richiede Android 6.0 o superiore. Puoi comunque provare ad eseguirlo nel browser.</string>
-    <string name="open">Apri</string>
+    <string name="aladin_api_error">L\'atlante stellare Aladin richiede Android 6.0 o superiore. Puoi comunque provare ad eseguirlo nel browser, o abilitare la modalità compatibilità nelle impostazioni.</string>
+    <string name="open_in_settings">Apri nel browser</string>
     <string name="cds_copyright">© Centre de Données astronomiques de Strasbourg, Unistra/CNRS.</string>
     <string name="aladin_welcome">Aladin è un atlante stellare interattivo sviluppato dal Centro dati astronomici di Strasburgo. Utilizza la tecnologia HiPS (Hierarchical Progressive Surveys).\nTelescope.Touch integra un client Aladin, così puoi vedere gli oggetti ad altissima qualità prima di puntare il telescopio! Puoi anche fare Go-To direttamente dalla mappa o cercare gli oggetti, grazie al risolutore Sesame.</string>
     <string name="vizier_catalogue_service">Servizio di catalogo VizieR</string>

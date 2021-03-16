@@ -7,10 +7,10 @@
         app:iconSpaceReserved="false">
 
         <ListPreference
-            android:defaultValue="0"
+            android:defaultValue="do_nothing"
             android:entries="@array/exit_action_pref"
             android:entryValues="@array/exit_action_pref_values"
-            android:key="app_exit_action"
+            android:key="on_exit_action"
             android:summary="%s"
             android:title="@string/exit_action"
             app:iconSpaceReserved="false" />
@@ -129,19 +129,19 @@
         app:iconSpaceReserved="false">
 
         <ListPreference
-            android:defaultValue="0"
+            android:defaultValue="hemisphere_auto"
             android:entries="@array/hemisphere_pref"
             android:entryValues="@array/hemisphere_pref_values"
-            android:key="polaris_hemisphere"
+            android:key="polaris_hr_hemisphere"
             android:summary="@string/hemisphere_description"
             android:title="@string/hemisphere"
             app:iconSpaceReserved="false" />
 
         <ListPreference
-            android:defaultValue="0"
+            android:defaultValue="reticle_skywatcher"
             android:entries="@array/reticle_pref"
             android:entryValues="@array/reticle_pref_values"
-            android:key="polaris_finder_reticle"
+            android:key="polaris_hr_reticle"
             android:summary="%s"
             android:title="@string/polaris_finder_reticle"
             app:iconSpaceReserved="false" />

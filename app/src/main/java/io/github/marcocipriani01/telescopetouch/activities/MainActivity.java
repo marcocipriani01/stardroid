@@ -62,9 +62,9 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.Objects;
 
 import io.github.marcocipriani01.telescopetouch.AppForegroundService;
+import io.github.marcocipriani01.telescopetouch.ApplicationConstants;
 import io.github.marcocipriani01.telescopetouch.ProUtils;
 import io.github.marcocipriani01.telescopetouch.R;
-import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
 import io.github.marcocipriani01.telescopetouch.activities.fragments.AboutFragment;
 import io.github.marcocipriani01.telescopetouch.activities.fragments.ActionFragment;
 import io.github.marcocipriani01.telescopetouch.activities.fragments.AladinFragment;
@@ -86,6 +86,7 @@ import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ACTI
 import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ACTION_DO_NOTHING;
 import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.EXIT_ACTION_PREF;
 import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
+import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.nsdHelper;
 
 /**
  * The main activity of the application, that manages all the fragments.
@@ -184,6 +185,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onStart();
         ProUtils.update(this);
         connectionManager.addManagerListener(this);
+        if (preferences.getBoolean(ApplicationConstants.NSD_PREF, false)) {
+            nsdHelper.start(this);
+        } else {
+            nsdHelper.stop();
+        }
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (AppForegroundService.class.getName().equals(service.service.getClassName())) {
@@ -198,10 +204,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        nsdHelper.stop();
         if (ACTION_DISCONNECT_EXIT.equals(preferences.getString(EXIT_ACTION_PREF, ACTION_DO_NOTHING))) {
             if (connectionManager.isConnected())
                 Toast.makeText(this, R.string.disconnected, Toast.LENGTH_SHORT).show();
-            TelescopeTouchApp.terminateConnections();
+            connectionManager.disconnect();
         }
     }
 
@@ -503,7 +510,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onCreate(savedInstanceState);
             setContentView(R.layout.bottom_drawer);
             getWindow().getAttributes().width = WindowManager.LayoutParams.MATCH_PARENT;
-            getBehavior().setState(BottomSheetBehavior.STATE_EXPANDED);
             Button proButton = findViewById(R.id.navigation_pro_button);
             Objects.requireNonNull(proButton).setVisibility(ProUtils.isPro ? View.GONE : View.VISIBLE);
             proButton.setOnClickListener(v -> ProUtils.playStore(getContext()));
@@ -520,6 +526,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         public void show() {
             if (navigationMenu != null)
                 selectNavItem();
+            getBehavior().setState(BottomSheetBehavior.STATE_EXPANDED);
             super.show();
             ((ViewGroup) getWindow().getDecorView()).getChildAt(0)
                     .startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_up_dialog));

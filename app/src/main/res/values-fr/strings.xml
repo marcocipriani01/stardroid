@@ -562,7 +562,7 @@
     <string name="hemisphere_auto">Détection automatique</string>
     <string name="hemisphere_northern">Nord (Étoile polaire)</string>
     <string name="hemisphere_southern">Sud (Sigma Octant)</string>
-    <string name="nsd_pref_description">Décourir automatiquement les services de réseau Zeroconf - Redémarrage nécessaire</string>
+    <string name="nsd_pref_description">Décourir automatiquement les services de réseau Zeroconf.</string>
     <string name="nsd_pref">Service de découverte réseau</string>
     <string name="reticle_skywatcher">Nouveau réticule Sky-Watcher</string>
     <string name="reticle_big_dipper">Grande ourse/Cassiopée</string>
@@ -596,7 +596,7 @@
     <string name="dark_mode_not_supported">Impossible de basculer vers le mode nuit !</string>
     <string name="no_internet_connection">Pas de connexion internet !</string>
     <string name="aladin_api_error">L\'atlas Aladin Sky nécessite Android 6.0 ou plus.Vous pouvez quand même essayer de le lancer dans votre navigateur.</string>
-    <string name="open">Ouvrir</string>
+    <string name="open_in_settings">Ouvrir</string>
     <string name="cds_copyright">© Centre de Données astronomiques de Strasbourg, Unistra/CNRS.</string>
     <string name="aladin_welcome">Aladin est un atlas intéractif développé par le Centre de Données astronomiques de Strasbourg. Il utilise la technologie HipS (Hierarchical Progressive Surveys).\nTelescope.Touch intégre un client Aladin, ainsi vous pouvez voir les cibles en haute définition avant de pointer le télescope ! Vous pouvez aussi déplacer le télescope à partir de la carte ou de la base de données objects, grâce au résolveur d\'objet SESAME.</string>
     <string name="vizier_catalogue_service">Service catalogue VizieR</string>
