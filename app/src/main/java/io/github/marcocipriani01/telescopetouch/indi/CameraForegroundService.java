@@ -34,8 +34,6 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.app.TaskStackBuilder;
 
-import org.indilib.i4j.client.INDIValueException;
-
 import java.util.Collection;
 
 import io.github.marcocipriani01.telescopetouch.R;
@@ -53,6 +51,9 @@ public class CameraForegroundService extends Service
     public static final String SERVICE_ACTION_STOP_CAPTURE = "stop_capture";
     private static final String TAG = TelescopeTouchApp.getTag(CameraForegroundService.class);
     private static final String NOTIFICATION_CHANNEL = "CCD_CAPTURE_SERVICE";
+    private static final int NOTIFICATION_ID = 2;
+    private static final int PENDING_INTENT_CCD_VIEWER = 5;
+    private static final int PENDING_INTENT_STOP_LOOP = 6;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private INDICamera camera;
     private NotificationManagerCompat notificationManager;
@@ -73,16 +74,19 @@ public class CameraForegroundService extends Service
                         start();
                     }
                     break;
-                case SERVICE_ACTION_STOP_CAPTURE:
-                    try {
-                        camera.abort();
-                    } catch (INDIValueException e) {
-                        Log.e(TAG, e.getMessage(), e);
-                    }
+                case SERVICE_STOP:
                     stopForeground(true);
                     stopSelf();
                     break;
-                case SERVICE_STOP:
+                case SERVICE_ACTION_STOP_CAPTURE:
+                    camera = intent.getParcelableExtra(INDI_CAMERA_EXTRA);
+                    if (camera != null) {
+                        try {
+                            camera.abort();
+                        } catch (Exception e) {
+                            Log.e(TAG, e.getMessage(), e);
+                        }
+                    }
                     stopForeground(true);
                     stopSelf();
                     break;
@@ -113,13 +117,13 @@ public class CameraForegroundService extends Service
         Intent appIntent = new Intent(this, MainActivity.class);
         appIntent.putExtra(MainActivity.ACTION, MainActivity.ACTION_CCD_CAPTURE);
         stackBuilder.addNextIntentWithParentStack(appIntent);
-        builder.setContentIntent(stackBuilder.getPendingIntent(1, PendingIntent.FLAG_UPDATE_CURRENT));
+        builder.setContentIntent(stackBuilder.getPendingIntent(PENDING_INTENT_CCD_VIEWER, PendingIntent.FLAG_UPDATE_CURRENT));
 
         Intent stopLoopIntent = new Intent(this, CameraForegroundService.class);
         stopLoopIntent.setAction(SERVICE_ACTION_STOP_CAPTURE);
         stopLoopIntent.putExtra(CameraForegroundService.INDI_CAMERA_EXTRA, camera);
         builder.addAction(new NotificationCompat.Action(null, getString(R.string.stop_capture),
-                PendingIntent.getService(this, 2, stopLoopIntent, PendingIntent.FLAG_UPDATE_CURRENT)));
+                PendingIntent.getService(this, PENDING_INTENT_STOP_LOOP, stopLoopIntent, PendingIntent.FLAG_UPDATE_CURRENT)));
 
         int totalCaptures = camera.getLoopTotalCaptures();
         if (totalCaptures == 0) {
@@ -127,7 +131,7 @@ public class CameraForegroundService extends Service
         } else {
             builder.setProgress(totalCaptures, totalCaptures - camera.getRemainingCaptures(), false);
         }
-        startForeground(1, builder.build());
+        startForeground(NOTIFICATION_ID, builder.build());
     }
 
     @Override
@@ -172,7 +176,7 @@ public class CameraForegroundService extends Service
     @Override
     public void onLoopProgressChange(int progress, int total) {
         builder.setProgress(total, progress, false);
-        notificationManager.notify(1, builder.build());
+        notificationManager.notify(NOTIFICATION_ID, builder.build());
     }
 
     @Override

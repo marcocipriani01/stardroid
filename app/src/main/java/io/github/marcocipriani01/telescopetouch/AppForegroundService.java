@@ -48,6 +48,11 @@ public class AppForegroundService extends Service implements ConnectionManager.M
     public static final String SERVICE_ACTION_EXIT = "action_stop";
     public static final String SERVICE_ACTION_DISCONNECT = "action_disconnect";
     private static final String NOTIFICATION_CHANNEL = "TELESCOPE_TOUCH_SERVICE";
+    private static final int NOTIFICATION_ID = 1;
+    private static final int PENDING_INTENT_OPEN_APP = 1;
+    private static final int PENDING_INTENT_MOUNT = 2;
+    private static final int PENDING_INTENT_DISCONNECT = 3;
+    private static final int PENDING_INTENT_EXIT = 4;
     private final Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
@@ -56,11 +61,6 @@ public class AppForegroundService extends Service implements ConnectionManager.M
             switch (intent.getAction()) {
                 case SERVICE_START:
                     start();
-                    break;
-                case SERVICE_ACTION_EXIT:
-                    stopForeground(true);
-                    stopSelf();
-                    System.exit(0);
                     break;
                 case SERVICE_STOP:
                     stopForeground(true);
@@ -71,6 +71,11 @@ public class AppForegroundService extends Service implements ConnectionManager.M
                     Toast.makeText(this, R.string.disconnected, Toast.LENGTH_SHORT).show();
                     stopForeground(true);
                     stopSelf();
+                    break;
+                case SERVICE_ACTION_EXIT:
+                    stopForeground(true);
+                    stopSelf();
+                    System.exit(0);
                     break;
             }
         }
@@ -98,25 +103,25 @@ public class AppForegroundService extends Service implements ConnectionManager.M
         Intent connectionIntent = new Intent(this, MainActivity.class);
         connectionIntent.putExtra(MainActivity.ACTION, MainActivity.ACTION_CONNECT);
         stackBuilder.addNextIntentWithParentStack(connectionIntent);
-        builder.setContentIntent(stackBuilder.getPendingIntent(1, PendingIntent.FLAG_UPDATE_CURRENT));
+        builder.setContentIntent(stackBuilder.getPendingIntent(PENDING_INTENT_OPEN_APP, PendingIntent.FLAG_UPDATE_CURRENT));
         if (connectionManager.isConnected()) {
             Intent mountIntent = new Intent(this, MainActivity.class);
             mountIntent.putExtra(MainActivity.ACTION, MainActivity.ACTION_MOUNT_CONTROL);
             stackBuilder.addNextIntentWithParentStack(mountIntent);
             builder.addAction(new NotificationCompat.Action(null, getString(R.string.mount),
-                    stackBuilder.getPendingIntent(2, PendingIntent.FLAG_UPDATE_CURRENT)));
+                    stackBuilder.getPendingIntent(PENDING_INTENT_MOUNT, PendingIntent.FLAG_UPDATE_CURRENT)));
 
             Intent disconnectIntent = new Intent(this, AppForegroundService.class);
             disconnectIntent.setAction(SERVICE_ACTION_DISCONNECT);
             builder.addAction(new NotificationCompat.Action(null, getString(R.string.disconnect),
-                    PendingIntent.getService(this, 3, disconnectIntent, PendingIntent.FLAG_UPDATE_CURRENT)));
+                    PendingIntent.getService(this, PENDING_INTENT_DISCONNECT, disconnectIntent, PendingIntent.FLAG_UPDATE_CURRENT)));
         } else {
             Intent closeIntent = new Intent(this, AppForegroundService.class);
             closeIntent.setAction(SERVICE_ACTION_EXIT);
             builder.addAction(new NotificationCompat.Action(null, getString(R.string.exit),
-                    PendingIntent.getService(this, 4, closeIntent, PendingIntent.FLAG_UPDATE_CURRENT)));
+                    PendingIntent.getService(this, PENDING_INTENT_EXIT, closeIntent, PendingIntent.FLAG_UPDATE_CURRENT)));
         }
-        startForeground(1, builder.build());
+        startForeground(NOTIFICATION_ID, builder.build());
     }
 
     @Override
