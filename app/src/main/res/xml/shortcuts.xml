@@ -15,7 +15,7 @@
             android:targetPackage="io.github.marcocipriani01.telescopetouch">
             <extra
                 android:name="MainActivityAction"
-                android:value="8" />
+                android:value="10" />
         </intent>
         <categories android:name="android.shortcut.aladin_sky_atlas" />
     </shortcut>
@@ -33,7 +33,7 @@
             android:targetPackage="io.github.marcocipriani01.telescopetouch">
             <extra
                 android:name="MainActivityAction"
-                android:value="9" />
+                android:value="11" />
         </intent>
         <categories android:name="android.shortcut.polaris_hour_angle" />
     </shortcut>
@@ -51,7 +51,7 @@
             android:targetPackage="io.github.marcocipriani01.telescopetouch">
             <extra
                 android:name="MainActivityAction"
-                android:value="10" />
+                android:value="12" />
         </intent>
         <categories android:name="android.shortcut.telescope_compass" />
     </shortcut>

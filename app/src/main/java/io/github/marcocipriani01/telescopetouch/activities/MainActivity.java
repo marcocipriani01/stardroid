@@ -17,6 +17,15 @@
 
 package io.github.marcocipriani01.telescopetouch.activities;
 
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ACTION_BACKGROUND_ALWAYS;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ACTION_BACKGROUND_IF_CONNECTED;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ACTION_DISCONNECT_EXIT;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ACTION_DO_NOTHING;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.EXIT_ACTION_PREF;
+import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
+import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.nsdHelper;
+import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.phd2;
+
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
@@ -83,15 +92,6 @@ import io.github.marcocipriani01.telescopetouch.activities.fragments.PolarisFrag
 import io.github.marcocipriani01.telescopetouch.activities.fragments.SFTPFragment;
 import io.github.marcocipriani01.telescopetouch.activities.util.DarkerModeManager;
 import io.github.marcocipriani01.telescopetouch.indi.ConnectionManager;
-
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ACTION_BACKGROUND_ALWAYS;
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ACTION_BACKGROUND_IF_CONNECTED;
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ACTION_DISCONNECT_EXIT;
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ACTION_DO_NOTHING;
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.EXIT_ACTION_PREF;
-import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
-import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.nsdHelper;
-import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.phd2;
 
 /**
  * The main activity of the application, that manages all the fragments.
@@ -179,11 +179,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void intentAndFragment(Intent intent) {
         int action = intent.getIntExtra(ACTION, -1);
-        if (action == -1) {
-            showFragment(currentPage, false);
-        } else {
-            showFragment(Pages.values()[action], false);
-        }
+        showFragment((action == -1) ? currentPage : Pages.values()[action], false);
         handler.postDelayed(() -> {
             int messageRes = intent.getIntExtra(MESSAGE, 0);
             if (messageRes != 0)
@@ -196,11 +192,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onStart();
         ProUtils.update(this);
         connectionManager.addManagerListener(this);
-        if (preferences.getBoolean(ApplicationConstants.NSD_PREF, false)) {
-            nsdHelper.start(this);
-        } else {
-            nsdHelper.stop();
-        }
+        if (preferences.getBoolean(ApplicationConstants.NSD_PREF, false)) nsdHelper.start(this);
+        else nsdHelper.stop();
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (AppForegroundService.class.getName().equals(service.service.getClassName())) {
@@ -210,11 +203,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return;
             }
         }
-        if (preferences.getBoolean(ApplicationConstants.KEEP_SCREEN_ON_PREF, false)) {
+        if (preferences.getBoolean(ApplicationConstants.KEEP_SCREEN_ON_PREF, false))
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        } else {
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        }
+        else getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     @Override
@@ -260,7 +251,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         menu.findItem(R.id.menu_darker_mode).setIcon(darkerMode ? R.drawable.light_mode : R.drawable.darker_mode);
         return super.onCreateOptionsMenu(menu);
@@ -303,11 +294,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 onActionSnackRequested(getString(R.string.shortcuts_not_supported));
             }
         } else if (itemId == R.id.menu_darker_mode) {
-            if ((currentPage == Pages.ALADIN) && (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)) {
+            if ((currentPage == Pages.ALADIN) && (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M))
                 onActionSnackRequested(getString(R.string.dark_mode_not_supported));
-            } else {
-                darkerModeManager.toggle();
-            }
+            else darkerModeManager.toggle();
         } else if (itemId == R.id.menu_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
         } else if (itemId == R.id.menu_skymap_diagnostics) {
@@ -368,11 +357,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fab.hide();
             } else {
                 fab.setImageResource(drawable);
-                if (actionFragment.isActionEnabled()) {
-                    fab.show();
-                } else {
-                    fab.hide();
-                }
+                if (actionFragment.isActionEnabled()) fab.show();
+                else fab.hide();
             }
         } else {
             fab.hide();
@@ -388,11 +374,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void setActionEnabled(boolean actionEnabled) {
-        if (actionEnabled) {
-            fab.show();
-        } else {
-            fab.hide();
-        }
+        if (actionEnabled) fab.show();
+        else fab.hide();
         invalidateOptionsMenu();
     }
 
@@ -593,11 +576,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (currentPage.lastInstance instanceof ActionFragment) {
                 ActionFragment actionFragment = (ActionFragment) currentPage.lastInstance;
                 actionFragment.setActionEnabledListener(MainActivity.this);
-                if (actionFragment.isActionEnabled()) {
-                    fab.show();
-                } else {
-                    fab.hide();
-                }
+                if (actionFragment.isActionEnabled()) fab.show();
+                else fab.hide();
             }
         }
     }

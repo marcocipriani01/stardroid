@@ -17,6 +17,10 @@
 
 package io.github.marcocipriani01.telescopetouch.indi;
 
+import static io.github.marcocipriani01.telescopetouch.AppForegroundService.SERVICE_PENDING_INTENT_FLAG;
+import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
+
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -40,8 +44,6 @@ import java.util.Collection;
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
 import io.github.marcocipriani01.telescopetouch.activities.MainActivity;
-
-import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
 
 public class CameraForegroundService extends Service
         implements INDICamera.CameraListener, ConnectionManager.ManagerListener {
@@ -96,6 +98,7 @@ public class CameraForegroundService extends Service
         return super.onStartCommand(intent, flags, startId);
     }
 
+    @SuppressLint("WrongConstant")
     private void start() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL,
@@ -118,20 +121,18 @@ public class CameraForegroundService extends Service
         Intent appIntent = new Intent(this, MainActivity.class);
         appIntent.putExtra(MainActivity.ACTION, MainActivity.ACTION_CCD_CAPTURE);
         stackBuilder.addNextIntentWithParentStack(appIntent);
-        builder.setContentIntent(stackBuilder.getPendingIntent(PENDING_INTENT_CCD_VIEWER, PendingIntent.FLAG_UPDATE_CURRENT));
+        builder.setContentIntent(stackBuilder.getPendingIntent(PENDING_INTENT_CCD_VIEWER, SERVICE_PENDING_INTENT_FLAG));
 
         Intent stopLoopIntent = new Intent(this, CameraForegroundService.class);
         stopLoopIntent.setAction(SERVICE_ACTION_STOP_CAPTURE);
         stopLoopIntent.putExtra(CameraForegroundService.INDI_CAMERA_EXTRA, camera);
         builder.addAction(new NotificationCompat.Action(null, getString(R.string.stop_capture),
-                PendingIntent.getService(this, PENDING_INTENT_STOP_LOOP, stopLoopIntent, PendingIntent.FLAG_UPDATE_CURRENT)));
+                PendingIntent.getService(this, PENDING_INTENT_STOP_LOOP, stopLoopIntent, SERVICE_PENDING_INTENT_FLAG)));
 
         int totalCaptures = camera.getLoopTotalCaptures();
-        if (totalCaptures == 0) {
-            builder.setProgress(0, 0, true);
-        } else {
+        if (totalCaptures == 0) builder.setProgress(0, 0, true);
+        else
             builder.setProgress(totalCaptures, totalCaptures - camera.getRemainingCaptures(), false);
-        }
         startForeground(NOTIFICATION_ID, builder.build());
     }
 

@@ -36,6 +36,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -99,8 +100,10 @@ public class ControlPanelFragment extends ActionFragment implements INDIServerCo
             public void onTabReselected(TabLayout.Tab tab) {
                 showActionbar();
                 DeviceControlFragment fragment = fragmentsMap.get(viewPager.getCurrentItem());
-                if (fragment != null)
-                    fragment.getListView().smoothScrollToPosition(0);
+                if (fragment != null) {
+                    RecyclerView listView = fragment.getListView();
+                    if (listView != null) listView.smoothScrollToPosition(0);
+                }
             }
         });
         tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager,
