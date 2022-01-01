@@ -17,6 +17,9 @@
 
 package io.github.marcocipriani01.telescopetouch.activities.views;
 
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ALADIN_FORCE;
+import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -47,9 +50,6 @@ import java.nio.charset.StandardCharsets;
 
 import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
 import io.github.marcocipriani01.telescopetouch.astronomy.EquatorialCoordinates;
-
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ALADIN_FORCE;
-import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
 
 public class AladinView extends WebView implements Runnable {
 

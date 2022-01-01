@@ -17,6 +17,10 @@
 
 package io.github.marcocipriani01.telescopetouch.activities.fragments;
 
+import static io.github.marcocipriani01.telescopetouch.maths.Formatters.latitudeToString;
+import static io.github.marcocipriani01.telescopetouch.maths.Formatters.longitudeToString;
+import static io.github.marcocipriani01.telescopetouch.maths.Formatters.magDeclinationToString;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -40,10 +44,6 @@ import androidx.appcompat.widget.Toolbar;
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.activities.CompassCalibrationActivity;
 import io.github.marcocipriani01.telescopetouch.sensors.CompassHelper;
-
-import static io.github.marcocipriani01.telescopetouch.maths.Formatters.latitudeToString;
-import static io.github.marcocipriani01.telescopetouch.maths.Formatters.longitudeToString;
-import static io.github.marcocipriani01.telescopetouch.maths.Formatters.magDeclinationToString;
 
 public class CompassFragment extends ActionFragment implements Toolbar.OnMenuItemClickListener {
 

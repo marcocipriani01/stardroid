@@ -17,6 +17,8 @@
 
 package io.github.marcocipriani01.telescopetouch.sensors;
 
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.GPS_OFF_NO_DIALOG_PREF;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -50,8 +52,6 @@ import java.util.List;
 import io.github.marcocipriani01.telescopetouch.ApplicationConstants;
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
-
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.GPS_OFF_NO_DIALOG_PREF;
 
 public abstract class LocationHelper implements LocationListener {
 

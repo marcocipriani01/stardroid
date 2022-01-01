@@ -17,6 +17,14 @@
 
 package io.github.marcocipriani01.telescopetouch.activities.fragments;
 
+import static java.lang.Math.asin;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+import static java.lang.Math.toDegrees;
+import static java.lang.Math.toRadians;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.VIZIER_WELCOME;
+import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -57,12 +65,6 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.tabs.TabLayout;
-import io.github.marcocipriani01.graphview.DefaultLabelFormatter;
-import io.github.marcocipriani01.graphview.GraphView;
-import io.github.marcocipriani01.graphview.GridLabelRenderer;
-import io.github.marcocipriani01.graphview.Viewport;
-import io.github.marcocipriani01.graphview.series.DataPoint;
-import io.github.marcocipriani01.graphview.series.LineGraphSeries;
 
 import org.indilib.i4j.Constants;
 import org.indilib.i4j.client.INDIValueException;
@@ -70,6 +72,12 @@ import org.indilib.i4j.client.INDIValueException;
 import java.util.Calendar;
 
 import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
+import io.github.marcocipriani01.graphview.DefaultLabelFormatter;
+import io.github.marcocipriani01.graphview.GraphView;
+import io.github.marcocipriani01.graphview.GridLabelRenderer;
+import io.github.marcocipriani01.graphview.Viewport;
+import io.github.marcocipriani01.graphview.series.DataPoint;
+import io.github.marcocipriani01.graphview.series.LineGraphSeries;
 import io.github.marcocipriani01.livephotoview.PhotoView;
 import io.github.marcocipriani01.telescopetouch.ApplicationConstants;
 import io.github.marcocipriani01.telescopetouch.ProUtils;
@@ -88,14 +96,6 @@ import io.github.marcocipriani01.telescopetouch.catalog.DSOEntry;
 import io.github.marcocipriani01.telescopetouch.catalog.PlanetEntry;
 import io.github.marcocipriani01.telescopetouch.catalog.StarEntry;
 import io.github.marcocipriani01.telescopetouch.sensors.LocationHelper;
-
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.VIZIER_WELCOME;
-import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
-import static java.lang.Math.asin;
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
-import static java.lang.Math.toDegrees;
-import static java.lang.Math.toRadians;
 
 /**
  * Allows the user to look for an astronomical object and slew the telescope.

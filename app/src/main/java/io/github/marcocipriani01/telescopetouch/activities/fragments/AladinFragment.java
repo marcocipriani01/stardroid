@@ -17,6 +17,10 @@
 
 package io.github.marcocipriani01.telescopetouch.activities.fragments;
 
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ALADIN_J2000_NOTE;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ALADIN_WELCOME;
+import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
@@ -74,10 +78,6 @@ import io.github.marcocipriani01.telescopetouch.astronomy.EquatorialCoordinates;
 import io.github.marcocipriani01.telescopetouch.astronomy.HorizontalCoordinates;
 import io.github.marcocipriani01.telescopetouch.astronomy.StarsPrecession;
 import io.github.marcocipriani01.telescopetouch.sensors.LocationHelper;
-
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ALADIN_J2000_NOTE;
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ALADIN_WELCOME;
-import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
 
 public class AladinFragment extends ActionFragment implements Toolbar.OnMenuItemClickListener,
         AladinView.AladinListener, SearchView.OnQueryTextListener, MenuItem.OnMenuItemClickListener {

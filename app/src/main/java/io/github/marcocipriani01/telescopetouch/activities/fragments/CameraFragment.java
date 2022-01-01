@@ -17,6 +17,10 @@
 
 package io.github.marcocipriani01.telescopetouch.activities.fragments;
 
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.CCD_LOOP_DELAY_PREF;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.RECEIVE_ALL_PHOTOS_PREF;
+import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
+
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -87,10 +91,6 @@ import io.github.marcocipriani01.telescopetouch.activities.util.SimpleAdapter;
 import io.github.marcocipriani01.telescopetouch.indi.ConnectionManager;
 import io.github.marcocipriani01.telescopetouch.indi.INDICamera;
 import io.github.marcocipriani01.telescopetouch.indi.NumberPropPref;
-
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.CCD_LOOP_DELAY_PREF;
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.RECEIVE_ALL_PHOTOS_PREF;
-import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
 
 public class CameraFragment extends ActionFragment implements INDICamera.CameraListener,
         CompoundButton.OnCheckedChangeListener, Toolbar.OnMenuItemClickListener, ConnectionManager.ManagerListener {
@@ -245,7 +245,11 @@ public class CameraFragment extends ActionFragment implements INDICamera.CameraL
                     INDICamera.SaveMode saveMode = (INDICamera.SaveMode) saveModeSpinner.getSelectedItem();
                     for (INDICamera camera : cameras) {
                         this.cameras.add(camera);
-                        camera.setSaveMode(saveMode);
+                        try {
+                            camera.setSaveMode(saveMode);
+                        } catch (UnsupportedOperationException ignored) {
+
+                        }
                     }
                 } else {
                     this.cameras.addAll(cameras);
@@ -560,7 +564,7 @@ public class CameraFragment extends ActionFragment implements INDICamera.CameraL
     public boolean isActionEnabled() {
         INDICamera camera = getCamera();
         if (camera == null) return false;
-        return camera.hasBitmap() && (!camera.isBitmapSaved());
+        return camera.bitmapNotSaved();
     }
 
     @Override
@@ -573,7 +577,7 @@ public class CameraFragment extends ActionFragment implements INDICamera.CameraL
     public void run() {
         INDICamera camera = getCamera();
         if (camera == null) return;
-        if (camera.hasBitmap() && (!camera.isBitmapSaved())) {
+        if (camera.bitmapNotSaved()) {
             try {
                 Uri uri = Objects.requireNonNull(getCamera()).saveImage();
                 if (uri != null) {

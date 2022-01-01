@@ -17,6 +17,8 @@
 
 package io.github.marcocipriani01.telescopetouch.astronomy;
 
+import static io.github.marcocipriani01.telescopetouch.astronomy.EquatorialCoordinates.getInstance;
+
 import android.content.res.Resources;
 import android.location.Location;
 import android.util.Log;
@@ -30,8 +32,6 @@ import java.util.TimeZone;
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
 import io.github.marcocipriani01.telescopetouch.maths.MathsUtils;
-
-import static io.github.marcocipriani01.telescopetouch.astronomy.EquatorialCoordinates.getInstance;
 
 public enum Planet {
     // The order here is the order in which they are drawn. To ensure that during

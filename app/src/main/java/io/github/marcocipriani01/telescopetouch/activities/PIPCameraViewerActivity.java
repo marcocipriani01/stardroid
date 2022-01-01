@@ -17,6 +17,8 @@
 
 package io.github.marcocipriani01.telescopetouch.activities;
 
+import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
+
 import android.annotation.SuppressLint;
 import android.app.AppOpsManager;
 import android.app.PictureInPictureParams;
@@ -40,8 +42,6 @@ import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.activities.util.DarkerModeManager;
 import io.github.marcocipriani01.telescopetouch.indi.ConnectionManager;
 import io.github.marcocipriani01.telescopetouch.indi.INDICamera;
-
-import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
 
 public class PIPCameraViewerActivity extends AppCompatActivity
         implements INDICamera.CameraListener, ConnectionManager.ManagerListener {

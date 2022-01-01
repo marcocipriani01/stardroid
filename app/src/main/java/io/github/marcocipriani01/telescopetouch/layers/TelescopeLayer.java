@@ -17,6 +17,8 @@
 
 package io.github.marcocipriani01.telescopetouch.layers;
 
+import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
+
 import android.content.res.Resources;
 
 import java.util.ArrayList;
@@ -30,8 +32,6 @@ import io.github.marcocipriani01.telescopetouch.renderer.RendererObjectManager;
 import io.github.marcocipriani01.telescopetouch.source.AstronomicalSource;
 import io.github.marcocipriani01.telescopetouch.source.ImageSource;
 import io.github.marcocipriani01.telescopetouch.source.TextSource;
-
-import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
 
 public class TelescopeLayer extends AbstractLayer {
 

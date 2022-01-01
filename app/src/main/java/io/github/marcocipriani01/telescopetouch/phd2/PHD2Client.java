@@ -27,10 +27,6 @@ import android.os.Looper;
 import android.util.Base64;
 import android.util.Log;
 
-import io.github.marcocipriani01.graphview.GraphView;
-import io.github.marcocipriani01.graphview.series.DataPoint;
-import io.github.marcocipriani01.graphview.series.LineGraphSeries;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,6 +40,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import io.github.marcocipriani01.graphview.GraphView;
+import io.github.marcocipriani01.graphview.series.DataPoint;
+import io.github.marcocipriani01.graphview.series.LineGraphSeries;
 import io.github.marcocipriani01.simplesocket.SimpleClient;
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;

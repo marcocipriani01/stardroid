@@ -17,6 +17,12 @@
 
 package io.github.marcocipriani01.telescopetouch;
 
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.EXIT_ACTION_PREF;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.NSD_PREF;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.POLARIS_HEMISPHERE_PREF;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.POLARIS_RETICLE_PREF;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.SKY_MAP_HIGH_REFRESH_PREF;
+
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -25,12 +31,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.widget.Toast;
-
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.EXIT_ACTION_PREF;
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.NSD_PREF;
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.POLARIS_HEMISPHERE_PREF;
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.POLARIS_RETICLE_PREF;
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.SKY_MAP_HIGH_REFRESH_PREF;
 
 /**
  * Pro.

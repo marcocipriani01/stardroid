@@ -17,6 +17,11 @@
 
 package io.github.marcocipriani01.telescopetouch.activities.fragments;
 
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.PHD2_GRAPH_ZOOM_PREF;
+import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.nsdHelper;
+import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.phd2;
+import static io.github.marcocipriani01.telescopetouch.activities.ServersActivity.getServers;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
@@ -53,16 +58,16 @@ import androidx.preference.PreferenceManager;
 
 import com.google.android.material.slider.Slider;
 import com.google.android.material.tabs.TabLayout;
-import io.github.marcocipriani01.graphview.DefaultLabelFormatter;
-import io.github.marcocipriani01.graphview.GraphView;
-import io.github.marcocipriani01.graphview.GridLabelRenderer;
-import io.github.marcocipriani01.graphview.Viewport;
 
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import io.github.marcocipriani01.graphview.DefaultLabelFormatter;
+import io.github.marcocipriani01.graphview.GraphView;
+import io.github.marcocipriani01.graphview.GridLabelRenderer;
+import io.github.marcocipriani01.graphview.Viewport;
 import io.github.marcocipriani01.livephotoview.PhotoView;
 import io.github.marcocipriani01.telescopetouch.ApplicationConstants;
 import io.github.marcocipriani01.telescopetouch.ProUtils;
@@ -70,11 +75,6 @@ import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.activities.util.ImprovedSpinnerListener;
 import io.github.marcocipriani01.telescopetouch.activities.views.SameSelectionSpinner;
 import io.github.marcocipriani01.telescopetouch.phd2.PHD2Client;
-
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.PHD2_GRAPH_ZOOM_PREF;
-import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.nsdHelper;
-import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.phd2;
-import static io.github.marcocipriani01.telescopetouch.activities.ServersActivity.getServers;
 
 public class PHD2Fragment extends ActionFragment implements PHD2Client.PHD2Listener,
         Slider.OnChangeListener, View.OnClickListener, CompoundButton.OnCheckedChangeListener {

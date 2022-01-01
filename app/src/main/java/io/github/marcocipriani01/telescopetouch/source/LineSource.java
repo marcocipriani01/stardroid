@@ -56,12 +56,6 @@ public class LineSource extends AbstractSource implements Colorable {
      * polyline in the renderer.
      */
     public List<GeocentricCoordinates> getVertices() {
-        List<GeocentricCoordinates> result;
-        if (vertices != null) {
-            result = vertices;
-        } else {
-            result = new ArrayList<>();
-        }
-        return Collections.unmodifiableList(result);
+        return Collections.unmodifiableList((vertices != null) ? vertices : new ArrayList<>());
     }
 }

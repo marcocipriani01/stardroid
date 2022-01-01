@@ -17,6 +17,8 @@
 
 package io.github.marcocipriani01.telescopetouch.activities;
 
+import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
@@ -47,6 +49,7 @@ import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -95,8 +98,6 @@ import io.github.marcocipriani01.telescopetouch.sensors.SensorAccuracyMonitor;
 import io.github.marcocipriani01.telescopetouch.touch.DragRotateZoomGestureDetector;
 import io.github.marcocipriani01.telescopetouch.touch.GestureInterpreter;
 import io.github.marcocipriani01.telescopetouch.touch.MapMover;
-
-import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
 
 /**
  * The main map-rendering Activity.
@@ -258,7 +259,7 @@ public class SkyMapActivity extends AppCompatActivity implements OnSharedPrefere
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         super.onCreateOptionsMenu(menu);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.skymap, menu);
@@ -328,7 +329,7 @@ public class SkyMapActivity extends AppCompatActivity implements OnSharedPrefere
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
         fullscreenControlsManager.delayedHide();
         int itemId = item.getItemId();

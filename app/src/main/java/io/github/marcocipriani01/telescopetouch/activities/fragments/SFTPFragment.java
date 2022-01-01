@@ -17,6 +17,9 @@
 
 package io.github.marcocipriani01.telescopetouch.activities.fragments;
 
+import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.nsdHelper;
+import static io.github.marcocipriani01.telescopetouch.activities.ServersActivity.getServers;
+
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -64,9 +67,6 @@ import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
 import io.github.marcocipriani01.telescopetouch.activities.MainActivity;
 import io.github.marcocipriani01.telescopetouch.activities.SFTPFolderActivity;
-
-import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.nsdHelper;
-import static io.github.marcocipriani01.telescopetouch.activities.ServersActivity.getServers;
 
 public class SFTPFragment extends ActionFragment {
 

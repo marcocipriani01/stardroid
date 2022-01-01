@@ -17,6 +17,10 @@
 
 package io.github.marcocipriani01.telescopetouch.activities;
 
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.LATITUDE_PREF;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.LONGITUDE_PREF;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -50,10 +54,6 @@ import java.util.Objects;
 
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
-
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.LATITUDE_PREF;
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.LONGITUDE_PREF;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 

@@ -17,6 +17,8 @@
 
 package io.github.marcocipriani01.telescopetouch.indi;
 
+import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
+
 import android.os.Handler;
 import android.util.Log;
 
@@ -38,8 +40,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
-
-import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
 
 public class INDIFocuser implements INDIPropertyListener {
 

@@ -17,13 +17,13 @@
 
 package io.github.marcocipriani01.telescopetouch.astronomy;
 
-import java.util.Calendar;
-
-import io.github.marcocipriani01.telescopetouch.R;
-
 import static io.github.marcocipriani01.telescopetouch.astronomy.TimeUtils.meanSiderealTime;
 import static io.github.marcocipriani01.telescopetouch.maths.Formatters.formatDegreesAsHours;
 import static io.github.marcocipriani01.telescopetouch.maths.Formatters.formatHours;
+
+import java.util.Calendar;
+
+import io.github.marcocipriani01.telescopetouch.R;
 
 public class Polaris {
 

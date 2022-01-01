@@ -17,14 +17,14 @@
 
 package io.github.marcocipriani01.telescopetouch.astronomy;
 
+import static java.lang.Math.abs;
+
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
 import io.github.marcocipriani01.telescopetouch.maths.MathsUtils;
-
-import static java.lang.Math.abs;
 
 /**
  * This class wraps the six parameters which define the path an object takes as

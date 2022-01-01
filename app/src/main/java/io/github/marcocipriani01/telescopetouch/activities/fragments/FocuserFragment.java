@@ -17,6 +17,8 @@
 
 package io.github.marcocipriani01.telescopetouch.activities.fragments;
 
+import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -49,8 +51,6 @@ import io.github.marcocipriani01.telescopetouch.activities.util.SimpleAdapter;
 import io.github.marcocipriani01.telescopetouch.indi.ConnectionManager;
 import io.github.marcocipriani01.telescopetouch.indi.INDIFocuser;
 import io.github.marcocipriani01.telescopetouch.indi.NumberPropPref;
-
-import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
 
 /**
  * This fragment shows directional buttons to move a focuser.

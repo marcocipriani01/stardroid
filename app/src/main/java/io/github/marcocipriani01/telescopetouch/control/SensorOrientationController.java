@@ -17,6 +17,9 @@
 
 package io.github.marcocipriani01.telescopetouch.control;
 
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.DISABLE_GYRO_PREF;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.SKY_MAP_HIGH_REFRESH_PREF;
+
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -27,9 +30,6 @@ import android.util.Log;
 import javax.inject.Inject;
 
 import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
-
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.DISABLE_GYRO_PREF;
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.SKY_MAP_HIGH_REFRESH_PREF;
 
 /**
  * Sets the direction of view from the orientation sensors.

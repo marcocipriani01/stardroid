@@ -17,6 +17,8 @@
 
 package io.github.marcocipriani01.telescopetouch.renderer;
 
+import static io.github.marcocipriani01.telescopetouch.maths.MathsUtils.DEGREES_TO_RADIANS;
+
 import android.graphics.Paint;
 import android.graphics.Typeface;
 
@@ -40,8 +42,6 @@ import io.github.marcocipriani01.telescopetouch.renderer.util.SkyRegionMap;
 import io.github.marcocipriani01.telescopetouch.renderer.util.TextureManager;
 import io.github.marcocipriani01.telescopetouch.renderer.util.TextureReference;
 import io.github.marcocipriani01.telescopetouch.source.TextSource;
-
-import static io.github.marcocipriani01.telescopetouch.maths.MathsUtils.DEGREES_TO_RADIANS;
 
 /**
  * Manages rendering of text labels.

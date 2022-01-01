@@ -17,6 +17,12 @@
 
 package io.github.marcocipriani01.telescopetouch.catalog;
 
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ONLY_VISIBLE_OBJECTS_PREF;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.SHOW_DSO_PREF;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.SHOW_PLANETS_PREF;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.SHOW_STARS_PREF;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Location;
@@ -39,11 +45,6 @@ import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.astronomy.EquatorialCoordinates;
 import io.github.marcocipriani01.telescopetouch.astronomy.HorizontalCoordinates;
 import io.github.marcocipriani01.telescopetouch.astronomy.TimeUtils;
-
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ONLY_VISIBLE_OBJECTS_PREF;
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.SHOW_DSO_PREF;
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.SHOW_PLANETS_PREF;
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.SHOW_STARS_PREF;
 
 public class CatalogArrayAdapter extends RecyclerView.Adapter<CatalogArrayAdapter.CatalogEntryHolder>
         implements SharedPreferences.OnSharedPreferenceChangeListener, SectionIndexer {
@@ -143,6 +144,7 @@ public class CatalogArrayAdapter extends RecyclerView.Adapter<CatalogArrayAdapte
         return shownEntries.size();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void reloadCatalog() {
         shownEntries.clear();
         if (onlyAboveHorizon && (location != null)) {
@@ -162,6 +164,7 @@ public class CatalogArrayAdapter extends RecyclerView.Adapter<CatalogArrayAdapte
         notifyDataSetChanged();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void filter(String string) {
         shownEntries.clear();
         if (onlyAboveHorizon && (location != null)) {

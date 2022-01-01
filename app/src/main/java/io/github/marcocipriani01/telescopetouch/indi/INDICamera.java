@@ -17,6 +17,8 @@
 
 package io.github.marcocipriani01.telescopetouch.indi;
 
+import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
@@ -82,11 +84,9 @@ import io.github.marcocipriani01.telescopetouch.BuildConfig;
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
 
-import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
-
 public class INDICamera implements INDIPropertyListener, Parcelable {
 
-    public static final Parcelable.Creator<INDICamera> CREATOR = new Parcelable.Creator<INDICamera>() {
+    public static final Parcelable.Creator<INDICamera> CREATOR = new Parcelable.Creator<>() {
         @Override
         public INDICamera createFromParcel(Parcel in) {
             int deviceHash = in.readInt();
@@ -342,8 +342,8 @@ public class INDICamera implements INDIPropertyListener, Parcelable {
         this.jpgQuality = jpgQuality;
     }
 
-    public boolean isBitmapSaved() {
-        return bitmapSaved;
+    public boolean bitmapNotSaved() {
+        return (lastBitmap != null) && !bitmapSaved;
     }
 
     public SaveMode getSaveMode() {
@@ -985,10 +985,6 @@ public class INDICamera implements INDIPropertyListener, Parcelable {
     @Override
     public String toString() {
         return device.getName();
-    }
-
-    public boolean hasBitmap() {
-        return lastBitmap != null;
     }
 
     public Bitmap getLastBitmap() {

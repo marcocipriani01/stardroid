@@ -17,6 +17,8 @@
 
 package io.github.marcocipriani01.telescopetouch.indi;
 
+import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
+
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.text.Editable;
@@ -45,8 +47,6 @@ import java.util.List;
 
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
-
-import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
 
 public class NumberPropPref extends PropPref<INDINumberElement> {
 

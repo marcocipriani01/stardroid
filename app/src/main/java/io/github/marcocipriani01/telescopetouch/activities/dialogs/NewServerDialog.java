@@ -17,6 +17,8 @@
 
 package io.github.marcocipriani01.telescopetouch.activities.dialogs;
 
+import static io.github.marcocipriani01.telescopetouch.activities.ServersActivity.getServers;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -34,8 +36,6 @@ import java.util.ArrayList;
 
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.activities.ServersActivity;
-
-import static io.github.marcocipriani01.telescopetouch.activities.ServersActivity.getServers;
 
 public class NewServerDialog {
 

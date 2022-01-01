@@ -17,6 +17,8 @@
 
 package io.github.marcocipriani01.telescopetouch.astronomy;
 
+import static io.github.marcocipriani01.telescopetouch.maths.MathsUtils.RADIANS_TO_DEGREES;
+
 import android.annotation.SuppressLint;
 import android.location.Location;
 
@@ -28,8 +30,6 @@ import java.util.regex.Pattern;
 
 import io.github.marcocipriani01.telescopetouch.maths.Formatters;
 import io.github.marcocipriani01.telescopetouch.maths.MathsUtils;
-
-import static io.github.marcocipriani01.telescopetouch.maths.MathsUtils.RADIANS_TO_DEGREES;
 
 public class EquatorialCoordinates {
 

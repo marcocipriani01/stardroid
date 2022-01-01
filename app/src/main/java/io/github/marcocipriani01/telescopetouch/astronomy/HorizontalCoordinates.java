@@ -17,6 +17,13 @@
 
 package io.github.marcocipriani01.telescopetouch.astronomy;
 
+import static java.lang.Math.asin;
+import static java.lang.Math.atan2;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+import static java.lang.Math.toDegrees;
+import static java.lang.Math.toRadians;
+
 import android.location.Location;
 
 import androidx.annotation.NonNull;
@@ -24,13 +31,6 @@ import androidx.annotation.NonNull;
 import java.util.Calendar;
 
 import io.github.marcocipriani01.telescopetouch.maths.Formatters;
-
-import static java.lang.Math.asin;
-import static java.lang.Math.atan2;
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
-import static java.lang.Math.toDegrees;
-import static java.lang.Math.toRadians;
 
 public class HorizontalCoordinates {
 

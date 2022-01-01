@@ -18,6 +18,7 @@
 package io.github.marcocipriani01.telescopetouch.activities;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -227,6 +228,7 @@ public class SFTPFolderActivity extends AppCompatActivity {
             Log.d(TAG, "Going to " + dir + " (" + this.targetPath + ")");
         }
 
+        @SuppressLint("NotifyDataSetChanged")
         @SuppressWarnings("unchecked")
         @Override
         public void run() {
@@ -286,8 +288,10 @@ public class SFTPFolderActivity extends AppCompatActivity {
             String name = null;
             if (file.getScheme().equals("content")) {
                 try (Cursor cursor = getContentResolver().query(file, null, null, null, null)) {
-                    if ((cursor != null) && cursor.moveToFirst())
-                        name = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                    if ((cursor != null) && cursor.moveToFirst()) {
+                        int index = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                        if (index >= 0) name = cursor.getString(index);
+                    }
                 } catch (Exception e) {
                     Log.e(TAG, e.getMessage(), e);
                 }
@@ -331,7 +335,6 @@ public class SFTPFolderActivity extends AppCompatActivity {
                 });
             }
         }
-
     }
 
     private class DownloadTask implements Runnable {
