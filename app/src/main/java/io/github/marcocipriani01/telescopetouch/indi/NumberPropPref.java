@@ -44,6 +44,7 @@ import org.indilib.i4j.client.INDIProperty;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
@@ -107,7 +108,7 @@ public class NumberPropPref extends PropPref<INDINumberElement> {
     @Override
     protected void onClick() {
         Context context = getContext();
-        if (!getSummary().toString().equals(resources.getString(R.string.no_indi_elements))) {
+        if (!Objects.requireNonNull(getSummary()).toString().equals(resources.getString(R.string.no_indi_elements))) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context)
                     .setTitle(prop.getLabel()).setIcon(R.drawable.edit);
             final List<INDINumberElement> elements = prop.getElementsAsList();

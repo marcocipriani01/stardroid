@@ -495,8 +495,8 @@ public enum Planet {
         }
         riseSetTime.setTimeInMillis(newTime);
         if (!riseSetTime.after(now)) {
-            Log.e(TAG, "Next rise set time (" + riseSetTime.toString()
-                    + ") should be after current time (" + now.toString() + ")");
+            Log.e(TAG, "Next rise set time (" + riseSetTime
+                    + ") should be after current time (" + now + ")");
         }
         return riseSetTime;
     }

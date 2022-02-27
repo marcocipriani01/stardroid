@@ -19,6 +19,7 @@ package io.github.marcocipriani01.telescopetouch.activities.fragments;
 
 import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -391,6 +392,7 @@ public class FocuserFragment extends ActionFragment implements View.OnClickListe
                     (float) focuser.speedE.getMax(), (float) focuser.speedE.getStep(), value);
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
         if (fromUser) {

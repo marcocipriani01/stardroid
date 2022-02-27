@@ -166,7 +166,7 @@ public abstract class RendererControllerBase {
     abstract protected EventQueuer getQueuer();
 
     protected void queueRunnable(String msg, final CommandType type, final Runnable r) {
-        RendererControllerBase.queueRunnable(getQueuer(), toString() + " - " + msg, type, r);
+        RendererControllerBase.queueRunnable(getQueuer(), this + " - " + msg, type, r);
     }
 
     // Used only to allow logging different types of events.  The distinction

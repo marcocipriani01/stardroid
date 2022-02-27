@@ -19,7 +19,12 @@ package io.github.marcocipriani01.telescopetouch;
 
 import android.app.Application;
 import android.os.Build;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapsSdkInitializedCallback;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.Session;
 
@@ -31,7 +36,7 @@ import io.github.marcocipriani01.telescopetouch.phd2.PHD2Client;
  *
  * @author marcocipriani01
  */
-public class TelescopeTouchApp extends Application {
+public class TelescopeTouchApp extends Application implements OnMapsSdkInitializedCallback {
 
     /**
      * Global connection manager.
@@ -57,9 +62,19 @@ public class TelescopeTouchApp extends Application {
         component = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this)).build();
         connectionManager.init(this);
+        MapsInitializer.initialize(getApplicationContext(), MapsInitializer.Renderer.LATEST, this);
     }
 
     public ApplicationComponent getApplicationComponent() {
         return component;
+    }
+
+    @Override
+    public void onMapsSdkInitialized(@NonNull MapsInitializer.Renderer renderer) {
+        if (renderer == MapsInitializer.Renderer.LATEST) {
+            Log.i("Telescope.Touch", "The latest version of the Google Maps renderer is used.");
+        } else {
+            Log.i("Telescope.Touch", "The legacy version of the Google Maps renderer is used.");
+        }
     }
 }

@@ -377,6 +377,7 @@ public class PHD2Fragment extends ActionFragment implements PHD2Client.PHD2Liste
         }
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
         if (fromUser && (graph != null)) {

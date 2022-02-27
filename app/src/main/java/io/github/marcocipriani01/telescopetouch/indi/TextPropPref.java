@@ -36,6 +36,7 @@ import org.indilib.i4j.client.INDITextElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
@@ -73,7 +74,7 @@ public class TextPropPref extends PropPref<INDITextElement> {
     @Override
     protected void onClick() {
         Context context = getContext();
-        if (!getSummary().toString().equals(context.getString(R.string.no_indi_elements))) {
+        if (!Objects.requireNonNull(getSummary()).toString().equals(context.getString(R.string.no_indi_elements))) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             final List<INDITextElement> elements = prop.getElementsAsList();
             final ArrayList<EditText> editTextViews = new ArrayList<>(elements.size());

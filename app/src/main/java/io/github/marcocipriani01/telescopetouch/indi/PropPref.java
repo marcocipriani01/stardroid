@@ -26,6 +26,7 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
@@ -85,7 +86,7 @@ public abstract class PropPref<Element extends INDIElement> extends Preference i
     }
 
     @Override
-    public void onBindViewHolder(PreferenceViewHolder holder) {
+    public void onBindViewHolder(@NonNull PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
         title = holder.itemView;
     }

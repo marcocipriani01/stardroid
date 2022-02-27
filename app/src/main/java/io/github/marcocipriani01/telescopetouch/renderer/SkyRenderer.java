@@ -156,10 +156,7 @@ public class SkyRenderer implements GLSurfaceView.Renderer {
         // except for the Nexus One, which only supports ARB but doesn't seem
         // to benefit from using VBOs anyway.  I should figure out what the
         // difference is and use ARB too, if I can.
-        boolean canUseVBO = false;
-        if (extensions.contains("GL_OES_vertex_buffer_object")) {
-            canUseVBO = true;
-        }
+        boolean canUseVBO = extensions.contains("GL_OES_vertex_buffer_object");
         // VBO support on the Cliq and Behold is broken and say they can
         // use them when they can't.  Explicitly disable it for these devices.
         final String[] badModels = {

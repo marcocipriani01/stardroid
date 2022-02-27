@@ -366,13 +366,8 @@ public class SkyMapActivity extends AppCompatActivity implements OnSharedPrefere
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         // Either of the following detectors can absorb the event, but one must not hide it from the other
-        boolean eventAbsorbed = false;
-        if (gestureDetector.onTouchEvent(event)) {
-            eventAbsorbed = true;
-        }
-        if (dragZoomRotateDetector.onTouchEvent(event)) {
-            eventAbsorbed = true;
-        }
+        boolean eventAbsorbed = gestureDetector.onTouchEvent(event);
+        if (dragZoomRotateDetector.onTouchEvent(event)) eventAbsorbed = true;
         return eventAbsorbed;
     }
 

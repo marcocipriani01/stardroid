@@ -19,6 +19,8 @@ package io.github.marcocipriani01.telescopetouch.control;
 
 import android.location.Location;
 
+import androidx.annotation.NonNull;
+
 /**
  * A trivial calculator that returns zero magnetic declination.  Used when
  * the user does not want magnetic correction.
@@ -37,6 +39,7 @@ public final class ZeroMagneticDeclinationCalculator implements MagneticDeclinat
         // Do nothing.
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Zero Magnetic Correction";

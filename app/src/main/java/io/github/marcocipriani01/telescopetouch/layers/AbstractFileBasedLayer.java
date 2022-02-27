@@ -78,7 +78,7 @@ public abstract class AbstractFileBasedLayer extends AbstractLayer {
                 fileSources.add(new ProtobufAstronomicalSource(proto, getResources()));
             }
             Log.d(TAG, "Found: " + fileSources.size() + " sources");
-            Log.d(TAG, String.format("Finished Loading: %s | Found %s sourcs.\n", sourceFilename, fileSources.size()));
+            Log.d(TAG, String.format("Finished Loading: %s | Found %s sources.\n", sourceFilename, fileSources.size()));
             refreshSources(EnumSet.of(UpdateType.Reset));
         } catch (IOException e) {
             Log.e(TAG, "Unable to open " + sourceFilename);

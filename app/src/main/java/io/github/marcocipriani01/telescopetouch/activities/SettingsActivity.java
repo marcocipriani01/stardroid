@@ -157,7 +157,7 @@ public class SettingsActivity extends AppCompatActivity implements Preference.On
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
+    public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
         if (preference == latitudePref) {
             String string = (String) newValue;
             try {

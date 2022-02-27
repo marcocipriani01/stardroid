@@ -31,6 +31,7 @@ import org.indilib.i4j.client.INDIBLOBElement;
 import org.indilib.i4j.client.INDIProperty;
 
 import java.util.List;
+import java.util.Objects;
 
 import io.github.marcocipriani01.telescopetouch.R;
 
@@ -67,7 +68,7 @@ public class BLOBPropPref extends PropPref<INDIBLOBElement> {
     @Override
     protected void onClick() {
         Context context = getContext();
-        if (!getSummary().toString().equals(resources.getString(R.string.no_indi_elements))) {
+        if (!Objects.requireNonNull(getSummary()).toString().equals(resources.getString(R.string.no_indi_elements))) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             final List<INDIBLOBElement> elements = prop.getElementsAsList();
             LinearLayout layout = new LinearLayout(context);

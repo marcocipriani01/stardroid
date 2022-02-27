@@ -36,6 +36,7 @@ import org.indilib.i4j.client.INDIProperty;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.indi.PropPref;
@@ -143,7 +144,7 @@ public class DeviceControlFragment extends PreferenceFragmentCompat implements I
         for (PropPref<?> pref : preferencesMap.values()) {
             PreferenceCategory group = groups.get(pref.getProp().getGroup());
             if (group != null) {
-                if (pref.getTitle().toString().toLowerCase().contains(newText)) {
+                if (Objects.requireNonNull(pref.getTitle()).toString().toLowerCase().contains(newText)) {
                     group.addPreference(pref);
                 } else {
                     group.removePreference(pref);
