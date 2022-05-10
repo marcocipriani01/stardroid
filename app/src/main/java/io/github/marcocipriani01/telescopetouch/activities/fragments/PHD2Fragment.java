@@ -70,7 +70,6 @@ import io.github.marcocipriani01.graphview.GridLabelRenderer;
 import io.github.marcocipriani01.graphview.Viewport;
 import io.github.marcocipriani01.livephotoview.PhotoView;
 import io.github.marcocipriani01.telescopetouch.ApplicationConstants;
-import io.github.marcocipriani01.telescopetouch.ProUtils;
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.activities.util.ImprovedSpinnerListener;
 import io.github.marcocipriani01.telescopetouch.activities.views.SameSelectionSpinner;
@@ -165,16 +164,6 @@ public class PHD2Fragment extends ActionFragment implements PHD2Client.PHD2Liste
                 if (phd2.isConnected()) {
                     phd2.disconnect();
                 } else {
-                    // PRO
-                    if (!ProUtils.isPro) {
-                        int count = preferences.getInt(ProUtils.PHD2_PRO_COUNTER, 0);
-                        if (count >= ProUtils.MAX_PHD2_CONNECTIONS) {
-                            requestActionSnack(R.string.buy_pro_continue_phd2);
-                            return;
-                        }
-                        preferences.edit().putInt(ProUtils.PHD2_PRO_COUNTER, count + 1).apply();
-                    }
-                    // END PRO
                     if (host.contains("@")) {
                         String[] split = host.split("@");
                         if (split.length == 2) host = split[1];

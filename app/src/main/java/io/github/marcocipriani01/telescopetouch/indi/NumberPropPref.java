@@ -55,30 +55,6 @@ public class NumberPropPref extends PropPref<INDINumberElement> {
         super(context, prop);
     }
 
-    /**
-     * Create the summary rich-text string
-     *
-     * @return the summary
-     */
-    @Override
-    protected Spannable createSummary() {
-        List<INDINumberElement> elements = prop.getElementsAsList();
-        int count = elements.size();
-        if (count > 0) {
-            StringBuilder stringBuilder = new StringBuilder();
-            int i;
-            stringBuilder.append(elements.get(0).getLabel()).append(": ");
-            for (i = 0; i < count - 1; i++) {
-                stringBuilder.append(elements.get(i).getValueAsString().trim()).append(", ")
-                        .append(elements.get(i + 1).getLabel()).append(": ");
-            }
-            stringBuilder.append(elements.get(i).getValueAsString().trim());
-            return new SpannableString(stringBuilder.toString());
-        } else {
-            return new SpannableString(resources.getString(R.string.no_indi_elements));
-        }
-    }
-
     @SuppressWarnings("SynchronizationOnLocalVariableOrMethodParameter")
     public static void setSliderValues(Slider slider, float min, float max, float step, float value) {
         float diff = max - min;
@@ -103,6 +79,30 @@ public class NumberPropPref extends PropPref<INDINumberElement> {
         setSliderValues(slider, (float) element.getMin(),
                 (float) element.getMax(), (float) element.getStep(),
                 (float) (double) element.getValue());
+    }
+
+    /**
+     * Create the summary rich-text string
+     *
+     * @return the summary
+     */
+    @Override
+    protected Spannable createSummary() {
+        List<INDINumberElement> elements = prop.getElementsAsList();
+        int count = elements.size();
+        if (count > 0) {
+            StringBuilder stringBuilder = new StringBuilder();
+            int i;
+            stringBuilder.append(elements.get(0).getLabel()).append(": ");
+            for (i = 0; i < count - 1; i++) {
+                stringBuilder.append(elements.get(i).getValueAsString().trim()).append(", ")
+                        .append(elements.get(i + 1).getLabel()).append(": ");
+            }
+            stringBuilder.append(elements.get(i).getValueAsString().trim());
+            return new SpannableString(stringBuilder.toString());
+        } else {
+            return new SpannableString(resources.getString(R.string.no_indi_elements));
+        }
     }
 
     @Override

@@ -69,7 +69,6 @@ import javax.inject.Inject;
 
 import io.github.marcocipriani01.telescopetouch.ApplicationConstants;
 import io.github.marcocipriani01.telescopetouch.BuildConfig;
-import io.github.marcocipriani01.telescopetouch.ProUtils;
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
 import io.github.marcocipriani01.telescopetouch.activities.dialogs.MultipleSearchResultsDialogFragment;
@@ -284,9 +283,6 @@ public class SkyMapActivity extends AppCompatActivity implements OnSharedPrefere
     @Override
     public void onResume() {
         super.onResume();
-        // PRO
-        ProUtils.update(this);
-        // END PRO
         Log.i(TAG, "Starting view");
         skyView.onResume();
         Log.i(TAG, "Starting controller");

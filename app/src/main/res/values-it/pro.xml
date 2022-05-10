@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="pro_new_msg">Telescope.Touch Pro è disponibile! Le funzioni Pro sono: cattura CCD, Aladin Sky Atlas, anteprime oggetti, gestore file remoti e molto altro!</string>
-    <string name="get_it">Compra</string>
-    <string name="pro_feature">Funzionalità Pro!</string>
-    <string name="get_telescope_touch_pro">Compra Telescope.Touch Pro</string>
-    <string name="goto_dialog_pro">Compra Pro per vedere le anteprime e i grafici altezza</string>
-    <string name="cannot_change_pro">Impossibile cambiare - funzionalità Pro!</string>
-    <string name="buy_pro_continue_capture">Compra Pro per continuare a scattare!</string>
-    <string name="buy_pro_continue_phd2">Compra Pro per continuare ad usare PHD2!</string>
-    <string name="buy_pro_continue_sftp">Compra Pro per continuare a gestire i file!</string>
+    <string name="pro_version_removed">Grazie a tutti quelli che hanno acquistato la versione Pro! Da ora, Telescope.Touch è completamente GRATIS e OPEN-SOURCE! Goditi tutti le funzionalità e, se puoi, contribuisci al progetto su GitHub!</string>
+    <string name="open_github">Apri GitHub</string>
+    <string name="contribute_github">Contribuisci</string>
+    <string name="donate_app">Dona</string>
 </resources>

@@ -59,7 +59,6 @@ import java.util.List;
 
 import io.github.marcocipriani01.telescopetouch.ApplicationConstants;
 import io.github.marcocipriani01.telescopetouch.NSDHelper;
-import io.github.marcocipriani01.telescopetouch.ProUtils;
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.activities.MainActivity;
 import io.github.marcocipriani01.telescopetouch.activities.WebManagerActivity;
@@ -100,21 +99,10 @@ public class ConnectionFragment extends ActionFragment implements ConnectionMana
 
         connectionButton = rootView.findViewById(R.id.connect_button);
         connectDevicesBox = rootView.findViewById(R.id.connect_all_checkbox);
-        // PRO
-        if (ProUtils.isPro) {
-            connectDevicesBox.setEnabled(true);
-            boolean autoConnectDev = preferences.getBoolean(ApplicationConstants.AUTO_CONNECT_DEVICES_PREF, false);
-            connectDevicesBox.setChecked(autoConnectDev);
-            connectDevicesBox.setSelected(autoConnectDev);
-            Toolbar toolbar = rootView.findViewById(R.id.connection_fragment_toolbar);
-            if (toolbar != null) toolbar.setTitle(context.getString(R.string.app_name) + " Pro");
-        } else {
-            connectDevicesBox.setEnabled(false);
-            connectDevicesBox.setText(context.getString(R.string.connect_all_devices) + " [PRO]");
-            connectDevicesBox.setChecked(false);
-            connectDevicesBox.setSelected(false);
-        }
-        // END PRO
+        connectDevicesBox.setEnabled(true);
+        boolean autoConnectDev = preferences.getBoolean(ApplicationConstants.AUTO_CONNECT_DEVICES_PREF, false);
+        connectDevicesBox.setChecked(autoConnectDev);
+        connectDevicesBox.setSelected(autoConnectDev);
         serversSpinner = rootView.findViewById(R.id.host_spinner);
         loadServers(getServers(preferences));
         portEditText = rootView.findViewById(R.id.port_field);
@@ -291,9 +279,7 @@ public class ConnectionFragment extends ActionFragment implements ConnectionMana
                 connectionButton.setEnabled(true);
                 serversSpinner.setEnabled(true);
                 portEditText.setEnabled(true);
-                // PRO
-                connectDevicesBox.setEnabled(ProUtils.isPro);
-                // END PRO
+                connectDevicesBox.setEnabled(true);
                 break;
             }
             case BUSY: {

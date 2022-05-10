@@ -62,7 +62,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import io.github.marcocipriani01.telescopetouch.ApplicationConstants;
-import io.github.marcocipriani01.telescopetouch.ProUtils;
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
 import io.github.marcocipriani01.telescopetouch.activities.MainActivity;
@@ -172,16 +171,6 @@ public class SFTPFragment extends ActionFragment {
 
     @SuppressWarnings("ConstantConditions")
     private void connectAction(View view) {
-        // PRO
-        if (!ProUtils.isPro) {
-            int count = preferences.getInt(ProUtils.SFTP_PRO_COUNTER, 0);
-            if (count >= ProUtils.MAX_SFTP_CONNECTIONS) {
-                requestActionSnack(R.string.buy_pro_continue_sftp);
-                return;
-            }
-            preferences.edit().putInt(ProUtils.SFTP_PRO_COUNTER, count + 1).apply();
-        }
-        // END PRO
         inputMethodManager.hideSoftInputFromWindow(usernameField.getWindowToken(), 0);
         inputMethodManager.hideSoftInputFromWindow(passwordField.getWindowToken(), 0);
         inputMethodManager.hideSoftInputFromWindow(pemPasswordField.getWindowToken(), 0);

@@ -631,8 +631,6 @@
     <string name="abort">Abandonner</string>
     <string name="guide_settled">Auto-guidage réalisé avec succès</string>
     <string name="auto_stretch_image">Étirement auto image</string>
-    <string name="buy_pro_continue_capture">Acheter Pro pour continuer la capture !</string>
-    <string name="buy_pro_continue_phd2">Acheter Pro pour poursuivre l\'utilisation de PHD2 !</string>
     <string name="phd2_calibrating">calibration en cours</string>
     <string name="camera_log">Caméra log :</string>
     <string name="can_not_connect_indi_web">Impossible de se connecter à  INDI Web Manager !</string>

@@ -48,7 +48,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
@@ -57,7 +56,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -80,7 +78,6 @@ import io.github.marcocipriani01.graphview.series.DataPoint;
 import io.github.marcocipriani01.graphview.series.LineGraphSeries;
 import io.github.marcocipriani01.livephotoview.PhotoView;
 import io.github.marcocipriani01.telescopetouch.ApplicationConstants;
-import io.github.marcocipriani01.telescopetouch.ProUtils;
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
 import io.github.marcocipriani01.telescopetouch.activities.views.AladinView;
@@ -348,56 +345,42 @@ public class GoToFragment extends ActionFragment implements SearchView.OnQueryTe
         EquatorialCoordinates coordinates = entry.getCoordinates();
 
         Spannable description = entry.createDescription(context, location);
-        // PRO
-        if (ProUtils.isPro) {
-            // END PRO
-            if (entry instanceof PlanetEntry) {
-                Planet planet = ((PlanetEntry) entry).getPlanet();
-                View rootView = View.inflate(context, R.layout.dialog_planet_details, null);
-                rootView.<TextView>findViewById(R.id.details_text).setText(description);
-                PhotoView photoView = rootView.findViewById(R.id.details_image);
-                photoView.setImageResource(planet.getGalleryResourceId());
-                createDetailsBox(rootView, description, photoView, null, planet);
-                builder.setView(rootView);
-            } else if (AladinView.isSupported(preferences)) {
-                View rootView = View.inflate(context, R.layout.dialog_object_details, null);
-                rootView.<TextView>findViewById(R.id.details_text).setText(description);
-                TextView noInternet = rootView.findViewById(R.id.details_no_internet);
-                AladinView aladinView = rootView.findViewById(R.id.details_aladin);
-                if (internetAvailable()) {
-                    aladinView.setHeight(600);
-                    aladinView.setAladinListener(new AladinView.AladinListener() {
-                        @Override
-                        public void onAladinError() {
-                            aladinView.setVisibility(View.GONE);
-                            noInternet.setVisibility(View.VISIBLE);
-                        }
-                    });
-                    aladinView.start(coordinates);
-                } else {
-                    aladinView.setVisibility(View.GONE);
-                    noInternet.setVisibility(View.VISIBLE);
-                }
-                createDetailsBox(rootView, description, rootView.findViewById(R.id.details_aladin_container), coordinates, null);
-                builder.setView(rootView);
-            } else if (location != null) {
-                GraphView graph = new GraphView(context);
-                initGraph(graph, coordinates, null);
-                ScrollView scrollView = new ScrollView(context);
-                scrollView.addView(graph);
-                builder.setView(graph);
+        if (entry instanceof PlanetEntry) {
+            Planet planet = ((PlanetEntry) entry).getPlanet();
+            View rootView = View.inflate(context, R.layout.dialog_planet_details, null);
+            rootView.<TextView>findViewById(R.id.details_text).setText(description);
+            PhotoView photoView = rootView.findViewById(R.id.details_image);
+            photoView.setImageResource(planet.getGalleryResourceId());
+            createDetailsBox(rootView, description, photoView, null, planet);
+            builder.setView(rootView);
+        } else if (AladinView.isSupported(preferences)) {
+            View rootView = View.inflate(context, R.layout.dialog_object_details, null);
+            rootView.<TextView>findViewById(R.id.details_text).setText(description);
+            TextView noInternet = rootView.findViewById(R.id.details_no_internet);
+            AladinView aladinView = rootView.findViewById(R.id.details_aladin);
+            if (internetAvailable()) {
+                aladinView.setHeight(600);
+                aladinView.setAladinListener(new AladinView.AladinListener() {
+                    @Override
+                    public void onAladinError() {
+                        aladinView.setVisibility(View.GONE);
+                        noInternet.setVisibility(View.VISIBLE);
+                    }
+                });
+                aladinView.start(coordinates);
+            } else {
+                aladinView.setVisibility(View.GONE);
+                noInternet.setVisibility(View.VISIBLE);
             }
-            // PRO
-        } else {
-            builder.setMessage(description);
-            Button proButton = new AppCompatButton(context);
-            proButton.setTextAppearance(context, R.style.TextAppearance_AppCompat_Medium);
-            proButton.setText(R.string.goto_dialog_pro);
-            proButton.setOnClickListener(v -> ProUtils.playStore(context));
-            proButton.setTextColor(context.getResources().getColor(R.color.colorAccent));
-            builder.setView(proButton);
+            createDetailsBox(rootView, description, rootView.findViewById(R.id.details_aladin_container), coordinates, null);
+            builder.setView(rootView);
+        } else if (location != null) {
+            GraphView graph = new GraphView(context);
+            initGraph(graph, coordinates, null);
+            ScrollView scrollView = new ScrollView(context);
+            scrollView.addView(graph);
+            builder.setView(graph);
         }
-        // END PRO
 
         // Only display buttons if the telescope is ready
         if ((connectionManager.telescopeCoordP != null) && (connectionManager.telescopeOnCoordSetP != null)) {

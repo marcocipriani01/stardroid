@@ -28,11 +28,15 @@ import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.phd2;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -74,7 +78,6 @@ import java.util.Objects;
 
 import io.github.marcocipriani01.telescopetouch.AppForegroundService;
 import io.github.marcocipriani01.telescopetouch.ApplicationConstants;
-import io.github.marcocipriani01.telescopetouch.ProUtils;
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.activities.fragments.AboutFragment;
 import io.github.marcocipriani01.telescopetouch.activities.fragments.ActionFragment;
@@ -109,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final int ACTION_SEARCH = Pages.GOTO.ordinal();
     public static final String MESSAGE = "MainActivityMessage";
     private static Pages currentPage = Pages.CONNECTION;
+    private static boolean hasDonatedAlready = false;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final ActivityResultLauncher<Intent> fileChooserLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -148,7 +152,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ProUtils.update(this);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         darkerModeManager = new DarkerModeManager(this, this, preferences);
         darkerMode = darkerModeManager.getPref();
@@ -168,7 +171,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ((ActionFragment) currentPage.lastInstance).run();
         });
         intentAndFragment(getIntent());
-        if (!ProUtils.isPro) ProUtils.maybeProVersionDialog(preferences, this);
+        if (preferences.getBoolean("PRO_VERSION_REMOVED", true)) {
+            new AlertDialog.Builder(this).setTitle(R.string.app_name)
+                    .setMessage(R.string.pro_version_removed)
+                    .setIcon(R.drawable.star_circle).setCancelable(false)
+                    .setNegativeButton(R.string.open_github, (dialog, which) ->
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/marcocipriani01/Telescope.Touch"))))
+                    .setPositiveButton(R.string.continue_button, (dialog, which) -> dialog.dismiss()).show();
+            preferences.edit().putBoolean("PRO_VERSION_REMOVED", false).apply();
+        }
     }
 
     @Override
@@ -190,7 +201,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onStart() {
         super.onStart();
-        ProUtils.update(this);
         connectionManager.addManagerListener(this);
         if (preferences.getBoolean(ApplicationConstants.NSD_PREF, false)) nsdHelper.start(this);
         else nsdHelper.stop();
@@ -238,7 +248,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
-        ProUtils.update(this);
+        try {
+            getPackageManager().getApplicationInfo("io.github.marcocipriani01.telescopetouchpro", 0);
+            hasDonatedAlready = true;
+        } catch (PackageManager.NameNotFoundException e) {
+            hasDonatedAlready = false;
+        }
         visible = true;
         darkerModeManager.start();
     }
@@ -328,13 +343,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void showFragment(Pages page, boolean animate) {
         if (page == Pages.ALADIN) {
-            // PRO
-            if (!ProUtils.isPro) {
-                ProUtils.toast(this);
-                ProUtils.playStore(this);
-                return;
-            }
-            // END PRO
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
         } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER);
@@ -539,9 +547,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onCreate(savedInstanceState);
             setContentView(R.layout.bottom_drawer);
             getWindow().getAttributes().width = WindowManager.LayoutParams.MATCH_PARENT;
-            Button proButton = findViewById(R.id.navigation_pro_button);
-            Objects.requireNonNull(proButton).setVisibility(ProUtils.isPro ? View.GONE : View.VISIBLE);
-            proButton.setOnClickListener(v -> ProUtils.playStore(getContext()));
+            Button proButton = findViewById(R.id.navigation_donate_btn);
+            Objects.requireNonNull(proButton).setVisibility(MainActivity.hasDonatedAlready ? View.GONE : View.VISIBLE);
+            proButton.setOnClickListener(v -> {
+                try {
+                    getContext().startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("market://details?id=io.github.marcocipriani01.telescopetouchpro")));
+                } catch (ActivityNotFoundException e) {
+                    getContext().startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://play.google.com/store/apps/details?id=io.github.marcocipriani01.telescopetouchpro")));
+                }
+            });
+            Objects.requireNonNull(this.<Button>findViewById(R.id.navigation_contribute_btn))
+                    .setOnClickListener(v -> getContext().startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://github.com/marcocipriani01/Telescope.Touch"))));
             NavigationView navigation = findViewById(R.id.navigation_view);
             Objects.requireNonNull(navigation).setNavigationItemSelectedListener(item -> {
                 dismiss();

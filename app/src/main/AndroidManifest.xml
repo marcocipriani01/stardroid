@@ -56,7 +56,6 @@
 
     <application
         android:name=".TelescopeTouchApp"
-        android:allowBackup="false"
         android:appCategory="productivity"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/app_icon"
@@ -73,7 +72,6 @@
             android:name=".activities.MainActivity"
             android:configChanges="uiMode"
             android:exported="true"
-            android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="fullUser"
             android:theme="@style/AppThemeNoActionBar"

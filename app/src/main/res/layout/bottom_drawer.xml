@@ -1,21 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
     android:background="@color/colorAccent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/navigation_pro_button"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:drawableStart="@drawable/star_circle"
-        android:text="@string/get_telescope_touch_pro"
-        android:theme="@style/AppThemeNoActionBar"
-        android:visibility="gone" />
+        android:orientation="horizontal"
+        tools:ignore="ButtonStyle">
+
+        <Button
+            android:id="@+id/navigation_contribute_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_weight="1"
+            android:theme="@style/AppThemeNoActionBar"
+            android:drawableStart="@drawable/code"
+            android:text="@string/contribute_github"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/navigation_donate_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_weight="1"
+            android:theme="@style/AppThemeNoActionBar"
+            android:drawableStart="@drawable/star_circle"
+            android:text="@string/donate_app"
+            android:visibility="gone" />
+    </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"

@@ -40,7 +40,6 @@ import java.util.Objects;
 import javax.inject.Inject;
 
 import io.github.marcocipriani01.telescopetouch.ApplicationConstants;
-import io.github.marcocipriani01.telescopetouch.ProUtils;
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
 import io.github.marcocipriani01.telescopetouch.activities.util.DarkerModeManager;
@@ -117,17 +116,6 @@ public class SettingsActivity extends AppCompatActivity implements Preference.On
                     resultLauncher.launch(new Intent(SettingsActivity.this, MapsActivity.class));
                     return true;
                 });
-
-        // PRO
-        if (!ProUtils.isPro) {
-            for (String s : ProUtils.PRO_PREFERENCES) {
-                ((Preference) Objects.requireNonNull(preferenceFragment.findPreference(s))).setOnPreferenceChangeListener((preference, newValue) -> {
-                    Snackbar.make(rootView, R.string.cannot_change_pro, Snackbar.LENGTH_SHORT).setTextColor(getResources().getColor(R.color.colorAccent)).show();
-                    return false;
-                });
-            }
-        }
-        // END PRO
     }
 
     @Override

@@ -82,7 +82,6 @@ import java.util.Objects;
 
 import io.github.marcocipriani01.livephotoview.PhotoView;
 import io.github.marcocipriani01.telescopetouch.ApplicationConstants;
-import io.github.marcocipriani01.telescopetouch.ProUtils;
 import io.github.marcocipriani01.telescopetouch.R;
 import io.github.marcocipriani01.telescopetouch.TelescopeTouchApp;
 import io.github.marcocipriani01.telescopetouch.activities.PIPCameraViewerActivity;
@@ -333,22 +332,6 @@ public class CameraFragment extends ActionFragment implements INDICamera.CameraL
     }
 
     public void capture(View v) {
-        // PRO
-        if (!ProUtils.isPro) {
-            int count = preferences.getInt(ProUtils.CAPTURE_PRO_COUNTER, 0);
-            if (count >= ProUtils.MAX_CAPTURES) {
-                requestActionSnack(R.string.buy_pro_continue_capture);
-                synchronized (connectionManager.indiCameras) {
-                    Collection<INDICamera> cameras = connectionManager.indiCameras.values();
-                    for (INDICamera camera : cameras) {
-                        camera.stopReceiving();
-                    }
-                }
-                return;
-            }
-            preferences.edit().putInt(ProUtils.CAPTURE_PRO_COUNTER, count + 1).apply();
-        }
-        // END PRO
         String str = exposureTimeField.getText().toString();
         INDICamera camera = getCamera();
         if (camera == null) {
@@ -418,22 +401,6 @@ public class CameraFragment extends ActionFragment implements INDICamera.CameraL
     }
 
     public void loopCapture(View v) {
-        // PRO
-        if (!ProUtils.isPro) {
-            int count = preferences.getInt(ProUtils.CAPTURE_PRO_COUNTER, 0);
-            if (count >= ProUtils.MAX_CAPTURES) {
-                requestActionSnack(R.string.buy_pro_continue_capture);
-                synchronized (connectionManager.indiCameras) {
-                    Collection<INDICamera> cameras = connectionManager.indiCameras.values();
-                    for (INDICamera camera : cameras) {
-                        camera.stopReceiving();
-                    }
-                }
-                return;
-            }
-            preferences.edit().putInt(ProUtils.CAPTURE_PRO_COUNTER, count + 1).apply();
-        }
-        // END PRO
         String str = exposureTimeField.getText().toString();
         INDICamera camera = getCamera();
         if (camera == null) {
@@ -497,25 +464,21 @@ public class CameraFragment extends ActionFragment implements INDICamera.CameraL
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         if (item == pipMenuItem) {
-            if (ProUtils.isPro) {
-                if (PIPCameraViewerActivity.isVisible()) {
-                    PIPCameraViewerActivity.finishInstance();
-                } else if (((AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE))
-                        .checkOpNoThrow(AppOpsManager.OPSTR_PICTURE_IN_PICTURE, android.os.Process.myUid(),
-                                context.getPackageName()) != AppOpsManager.MODE_ALLOWED) {
-                    requestActionSnack(R.string.pip_permission_required);
-                } else {
-                    INDICamera camera = getCamera();
-                    if (camera == null) {
-                        requestActionSnack(R.string.no_camera_selected);
-                    } else {
-                        Intent intent = new Intent(context, PIPCameraViewerActivity.class);
-                        intent.putExtra(PIPCameraViewerActivity.INDI_CAMERA_EXTRA, camera);
-                        startActivity(intent);
-                    }
-                }
+            if (PIPCameraViewerActivity.isVisible()) {
+                PIPCameraViewerActivity.finishInstance();
+            } else if (((AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE))
+                    .checkOpNoThrow(AppOpsManager.OPSTR_PICTURE_IN_PICTURE, android.os.Process.myUid(),
+                            context.getPackageName()) != AppOpsManager.MODE_ALLOWED) {
+                requestActionSnack(R.string.pip_permission_required);
             } else {
-                requestActionSnack(R.string.pro_feature);
+                INDICamera camera = getCamera();
+                if (camera == null) {
+                    requestActionSnack(R.string.no_camera_selected);
+                } else {
+                    Intent intent = new Intent(context, PIPCameraViewerActivity.class);
+                    intent.putExtra(PIPCameraViewerActivity.INDI_CAMERA_EXTRA, camera);
+                    startActivity(intent);
+                }
             }
             return true;
         }
@@ -543,20 +506,12 @@ public class CameraFragment extends ActionFragment implements INDICamera.CameraL
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (buttonView == fitsStretchSwitch) {
-            if (ProUtils.isPro) {
-                INDICamera camera = getCamera();
-                if (camera != null) {
-                    camera.setStretch(isChecked);
-                    camera.reloadBitmap();
-                }
-                preferences.edit().putBoolean(ApplicationConstants.STRETCH_FITS_PREF, isChecked).apply();
-            } else {
-                fitsStretchSwitch.setOnCheckedChangeListener(null);
-                fitsStretchSwitch.setSelected(false);
-                fitsStretchSwitch.setChecked(false);
-                fitsStretchSwitch.setOnCheckedChangeListener(this);
-                ProUtils.toast(context);
+            INDICamera camera = getCamera();
+            if (camera != null) {
+                camera.setStretch(isChecked);
+                camera.reloadBitmap();
             }
+            preferences.edit().putBoolean(ApplicationConstants.STRETCH_FITS_PREF, isChecked).apply();
         }
     }
 
