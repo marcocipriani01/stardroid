@@ -273,6 +273,27 @@
                         tools:listitem="@layout/simple_spinner_item" />
                 </TableRow>
 
+                <TableRow
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:text="@string/transfer_format"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/white" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/ccd_transfer_format_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_weight="1"
+                        tools:listitem="@layout/simple_spinner_item" />
+                </TableRow>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

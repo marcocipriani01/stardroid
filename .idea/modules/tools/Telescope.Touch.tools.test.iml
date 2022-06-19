@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":tools:test" external.linked.project.path="$MODULE_DIR$/../../../tools" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="Telescope.Touch" external.system.module.type="sourceSet" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output-test url="file://$MODULE_DIR$/../../../tools/build/classes/java/test" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../tools/build/extracted-include-protos/test">
+      <sourceFolder url="file://$MODULE_DIR$/../../../tools/build/extracted-include-protos/test" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../tools/build/extracted-protos/test">
+      <sourceFolder url="file://$MODULE_DIR$/../../../tools/build/extracted-protos/test" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../tools/build/generated/source/proto/test/java" />
+    <content url="file://$MODULE_DIR$/../../../tools/src/test" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="Telescope.Touch.tools.main" />
+    <orderEntry type="library" name="Gradle: com.google.protobuf:protobuf-java:3.15.6" level="project" />
+  </component>
+  <component name="TestModuleProperties" production-module="Telescope.Touch.tools.main" />
+</module>

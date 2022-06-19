@@ -18,32 +18,11 @@
     <output url="file://$MODULE_DIR$/../../../tools/build/classes/java/main" />
     <output-test url="file://$MODULE_DIR$/../../../tools/build/classes/java/test" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../../../datamodel/src/main/proto">
-      <sourceFolder url="file://$MODULE_DIR$/../../../datamodel/src/main/proto" isTestSource="false" />
-    </content>
     <content url="file://$MODULE_DIR$/../../../tools">
-      <sourceFolder url="file://$MODULE_DIR$/../../../tools/src/main/java" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/../../../tools/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../../tools/build" />
     </content>
-    <content url="file://$MODULE_DIR$/../../../tools/build/extracted-include-protos/main">
-      <sourceFolder url="file://$MODULE_DIR$/../../../tools/build/extracted-include-protos/main" isTestSource="false" />
-    </content>
-    <content url="file://$MODULE_DIR$/../../../tools/build/extracted-include-protos/test">
-      <sourceFolder url="file://$MODULE_DIR$/../../../tools/build/extracted-include-protos/test" isTestSource="true" />
-    </content>
-    <content url="file://$MODULE_DIR$/../../../tools/build/extracted-protos/main">
-      <sourceFolder url="file://$MODULE_DIR$/../../../tools/build/extracted-protos/main" isTestSource="false" />
-    </content>
-    <content url="file://$MODULE_DIR$/../../../tools/build/extracted-protos/test">
-      <sourceFolder url="file://$MODULE_DIR$/../../../tools/build/extracted-protos/test" isTestSource="true" />
-    </content>
-    <content url="file://$MODULE_DIR$/../../../tools/build/generated/source/proto/main/java">
-      <sourceFolder url="file://$MODULE_DIR$/../../../tools/build/generated/source/proto/main/java" isTestSource="false" />
-    </content>
-    <content url="file://$MODULE_DIR$/../../../tools/build/generated/source/proto/test/java" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Gradle: com.google.protobuf:protobuf-java:3.15.6" level="project" />
   </component>
 </module>

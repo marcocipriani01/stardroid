@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":datamodel:test" external.linked.project.path="$MODULE_DIR$/../../../datamodel" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="Telescope.Touch" external.system.module.type="sourceSet" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output-test url="file://$MODULE_DIR$/../../../datamodel/build/classes/java/test" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../datamodel/build/extracted-include-protos/test" />
+    <content url="file://$MODULE_DIR$/../../../datamodel/build/extracted-protos/test" />
+    <content url="file://$MODULE_DIR$/../../../datamodel/build/generated/source/proto/test/java" />
+    <content url="file://$MODULE_DIR$/../../../datamodel/src/test" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="Telescope.Touch.datamodel.main" />
+    <orderEntry type="library" name="Gradle: com.google.protobuf:protobuf-javalite:3.15.6" level="project" />
+  </component>
+  <component name="TestModuleProperties" production-module="Telescope.Touch.datamodel.main" />
+</module>

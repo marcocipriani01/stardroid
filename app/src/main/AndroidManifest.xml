@@ -50,10 +50,6 @@
         android:name="android.hardware.screen.portrait"
         android:required="false" />
 
-    <queries>
-        <package android:name="io.github.marcocipriani01.telescopetouchpro" />
-    </queries>
-
     <application
         android:name=".TelescopeTouchApp"
         android:appCategory="productivity"

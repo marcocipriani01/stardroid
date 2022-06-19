@@ -4,8 +4,15 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Telescope.Touch.iml" filepath="$PROJECT_DIR$/.idea/modules/Telescope.Touch.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Telescope.Touch.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Telescope.Touch.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Telescope.Touch.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Telescope.Touch.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Telescope.Touch.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Telescope.Touch.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Telescope.Touch.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Telescope.Touch.app.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/datamodel/Telescope.Touch.datamodel.iml" filepath="$PROJECT_DIR$/.idea/modules/datamodel/Telescope.Touch.datamodel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/datamodel/Telescope.Touch.datamodel.main.iml" filepath="$PROJECT_DIR$/.idea/modules/datamodel/Telescope.Touch.datamodel.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/datamodel/Telescope.Touch.datamodel.test.iml" filepath="$PROJECT_DIR$/.idea/modules/datamodel/Telescope.Touch.datamodel.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/tools/Telescope.Touch.tools.iml" filepath="$PROJECT_DIR$/.idea/modules/tools/Telescope.Touch.tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tools/Telescope.Touch.tools.main.iml" filepath="$PROJECT_DIR$/.idea/modules/tools/Telescope.Touch.tools.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tools/Telescope.Touch.tools.test.iml" filepath="$PROJECT_DIR$/.idea/modules/tools/Telescope.Touch.tools.test.iml" />
     </modules>
   </component>
 </project>

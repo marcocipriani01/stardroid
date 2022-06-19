@@ -19,24 +19,10 @@
     <output-test url="file://$MODULE_DIR$/../../../datamodel/build/classes/java/test" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../datamodel">
-      <sourceFolder url="file://$MODULE_DIR$/../../../datamodel/src/main/proto" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/../../../datamodel/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../../datamodel/build" />
     </content>
-    <content url="file://$MODULE_DIR$/../../../datamodel/build/extracted-include-protos/main">
-      <sourceFolder url="file://$MODULE_DIR$/../../../datamodel/build/extracted-include-protos/main" isTestSource="false" />
-    </content>
-    <content url="file://$MODULE_DIR$/../../../datamodel/build/extracted-include-protos/test" />
-    <content url="file://$MODULE_DIR$/../../../datamodel/build/extracted-protos/main">
-      <sourceFolder url="file://$MODULE_DIR$/../../../datamodel/build/extracted-protos/main" isTestSource="false" />
-    </content>
-    <content url="file://$MODULE_DIR$/../../../datamodel/build/extracted-protos/test" />
-    <content url="file://$MODULE_DIR$/../../../datamodel/build/generated/source/proto/main/java">
-      <sourceFolder url="file://$MODULE_DIR$/../../../datamodel/build/generated/source/proto/main/java" isTestSource="false" />
-    </content>
-    <content url="file://$MODULE_DIR$/../../../datamodel/build/generated/source/proto/test/java" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Gradle: com.google.protobuf:protobuf-javalite:3.15.6" level="project" />
   </component>
 </module>

@@ -745,4 +745,5 @@
     <string name="find_star">Find star</string>
     <string name="receive_every_photo">Receive every photo</string>
     <string name="receive_every_photo_summary">By default, Telescope.Touch only downloads photos taken using the app. Enable this setting to receive images taken by any INDI client (e.g. KStars). May quickly drain the battery.</string>
+    <string name="contribute_github">Contribute</string>
 </resources>

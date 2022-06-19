@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="pro_version_removed">Grazie a tutti quelli che hanno acquistato la versione Pro! Da ora, Telescope.Touch è completamente GRATIS e OPEN-SOURCE! Goditi tutti le funzionalità e, se puoi, contribuisci al progetto su GitHub!</string>
-    <string name="open_github">Apri GitHub</string>
-    <string name="contribute_github">Contribuisci</string>
-    <string name="donate_app">Dona</string>
-</resources>

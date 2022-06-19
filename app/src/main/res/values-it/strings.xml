@@ -744,4 +744,5 @@
     <string name="find_star">Cerca stella</string>
     <string name="receive_every_photo">Ricevi tutte le foto</string>
     <string name="receive_every_photo_summary">Normalmente, Telescope.Touch scarica solo le foto scattate tramite l\'app. Abilita questa impostazione per ricevere le foto scattate da altri client INDI (es. KStars). Potrebbe scaricare velocemente la batteria.</string>
+    <string name="contribute_github">Contribuisci</string>
 </resources>
