@@ -5,4 +5,4 @@ pluginManagement {
         mavenCentral()
     }
 }
-include ":app", ":datamodel", ":tools"
+include(":app", ":datamodel", ":tools")
