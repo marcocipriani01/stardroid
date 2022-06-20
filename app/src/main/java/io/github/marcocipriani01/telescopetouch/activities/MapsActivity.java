@@ -86,7 +86,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
         }
-        Places.initialize(this, getString(R.string.google_maps_key));
+        try {
+            Places.initialize(this,
+                    getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA)
+                            .metaData.get("com.google.android.geo.API_KEY").toString());
+        } catch (PackageManager.NameNotFoundException e) {
+            throw new IllegalStateException(e);
+        }
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         ((SupportMapFragment) Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.map))).getMapAsync(this);
     }

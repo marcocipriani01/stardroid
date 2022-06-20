@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+apply plugin: 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 
 android {
     compileSdkVersion 32
@@ -11,14 +12,6 @@ android {
         versionCode 38
         versionName "1.8.8"
         multiDexEnabled true
-        if (file("api.properties").exists()) {
-            Properties properties = new Properties()
-            properties.load(project.file("api.properties").newDataInputStream())
-            def mapsAPIKey = properties.getProperty("maps-api-key")
-            resValue "string", "google_maps_key", mapsAPIKey
-        } else {
-            resValue "string", "google_maps_key", ""
-        }
     }
     buildTypes {
         release {
