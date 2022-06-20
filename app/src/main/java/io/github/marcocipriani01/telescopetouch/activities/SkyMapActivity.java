@@ -273,7 +273,7 @@ public class SkyMapActivity extends AppCompatActivity implements OnSharedPrefere
     @Override
     protected void onStart() {
         super.onStart();
-        if (preferences.getBoolean(ApplicationConstants.KEEP_SCREEN_ON_PREF, false)) {
+        if (preferences.getBoolean(ApplicationConstants.KEEP_SCREEN_ON_PREF, true)) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         } else {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -406,7 +406,7 @@ public class SkyMapActivity extends AppCompatActivity implements OnSharedPrefere
         } else if (ApplicationConstants.ROTATE_HORIZON_PREF.equals(key)) {
             model.setHorizontalRotation(preferences.getBoolean(key, false));
         } else if (ApplicationConstants.SKY_MAP_HIGH_REFRESH_PREF.equals(key)) {
-            gestureInterpreter.setUpdateRate(preferences.getBoolean(ApplicationConstants.SKY_MAP_HIGH_REFRESH_PREF, false) ? 60 : 30);
+            gestureInterpreter.setUpdateRate(preferences.getBoolean(ApplicationConstants.SKY_MAP_HIGH_REFRESH_PREF, true) ? 60 : 30);
         }
     }
 
@@ -445,7 +445,7 @@ public class SkyMapActivity extends AppCompatActivity implements OnSharedPrefere
 
         MapMover mapMover = new MapMover(model, controller, this, preferences);
         gestureInterpreter = new GestureInterpreter(fullscreenControlsManager, mapMover);
-        gestureInterpreter.setUpdateRate(preferences.getBoolean(ApplicationConstants.SKY_MAP_HIGH_REFRESH_PREF, false) ? 60 : 30);
+        gestureInterpreter.setUpdateRate(preferences.getBoolean(ApplicationConstants.SKY_MAP_HIGH_REFRESH_PREF, true) ? 60 : 30);
         gestureDetector = new GestureDetector(this, gestureInterpreter);
         dragZoomRotateDetector = new DragRotateZoomGestureDetector(mapMover);
 

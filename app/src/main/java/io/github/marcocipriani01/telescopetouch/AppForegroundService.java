@@ -18,7 +18,7 @@
 package io.github.marcocipriani01.telescopetouch;
 
 import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ACTION_BACKGROUND_ALWAYS;
-import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ACTION_DO_NOTHING;
+import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.ACTION_BACKGROUND_IF_CONNECTED;
 import static io.github.marcocipriani01.telescopetouch.ApplicationConstants.EXIT_ACTION_PREF;
 import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.connectionManager;
 import static io.github.marcocipriani01.telescopetouch.TelescopeTouchApp.phd2;
@@ -170,7 +170,7 @@ public class AppForegroundService extends Service implements ConnectionManager.M
             if (!phd2.isConnected()) {
                 stopForeground(true);
                 if (PreferenceManager.getDefaultSharedPreferences(this)
-                        .getString(EXIT_ACTION_PREF, ACTION_DO_NOTHING).equals(ACTION_BACKGROUND_ALWAYS)) {
+                        .getString(EXIT_ACTION_PREF, ACTION_BACKGROUND_IF_CONNECTED).equals(ACTION_BACKGROUND_ALWAYS)) {
                     start();
                 } else {
                     stopSelf();

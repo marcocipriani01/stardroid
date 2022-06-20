@@ -7,13 +7,13 @@
         app:iconSpaceReserved="false">
 
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="keep_screen_on"
             android:title="@string/keep_screen_on"
             app:iconSpaceReserved="false" />
 
         <ListPreference
-            android:defaultValue="do_nothing"
+            android:defaultValue="background_if_connected"
             android:entries="@array/exit_action_pref"
             android:entryValues="@array/exit_action_pref_values"
             android:key="on_exit_action"
@@ -22,7 +22,7 @@
             app:iconSpaceReserved="false" />
 
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="network_service_discovery"
             android:summary="@string/nsd_pref_description"
             android:title="@string/nsd_pref"
@@ -171,7 +171,7 @@
         app:title="@string/sky_map_settings">
 
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="sky_map_high_refresh"
             android:summary="@string/high_refresh_rate_summary"
             android:title="@string/high_refresh_rate"

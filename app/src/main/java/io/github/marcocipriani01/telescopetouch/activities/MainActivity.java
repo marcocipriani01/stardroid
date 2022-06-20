@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onStart() {
         super.onStart();
         connectionManager.addManagerListener(this);
-        if (preferences.getBoolean(ApplicationConstants.NSD_PREF, false)) nsdHelper.start(this);
+        if (preferences.getBoolean(ApplicationConstants.NSD_PREF, true)) nsdHelper.start(this);
         else nsdHelper.stop();
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return;
             }
         }
-        if (preferences.getBoolean(ApplicationConstants.KEEP_SCREEN_ON_PREF, false))
+        if (preferences.getBoolean(ApplicationConstants.KEEP_SCREEN_ON_PREF, true))
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         else getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onDestroy() {
         super.onDestroy();
         nsdHelper.stop();
-        if (ACTION_DISCONNECT_EXIT.equals(preferences.getString(EXIT_ACTION_PREF, ACTION_DO_NOTHING))) {
+        if (ACTION_DISCONNECT_EXIT.equals(preferences.getString(EXIT_ACTION_PREF, ACTION_BACKGROUND_IF_CONNECTED))) {
             if (connectionManager.isConnected()) {
                 Toast.makeText(this, R.string.disconnected, Toast.LENGTH_SHORT).show();
                 connectionManager.disconnect();
@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onStop() {
         super.onStop();
         connectionManager.removeManagerListener(this);
-        String exitAction = preferences.getString(EXIT_ACTION_PREF, ACTION_DO_NOTHING);
+        String exitAction = preferences.getString(EXIT_ACTION_PREF, ACTION_BACKGROUND_IF_CONNECTED);
         if (ACTION_BACKGROUND_ALWAYS.equals(exitAction) ||
                 (ACTION_BACKGROUND_IF_CONNECTED.equals(exitAction) &&
                         (connectionManager.isConnected() || phd2.isConnected()))) {
