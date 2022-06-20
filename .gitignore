@@ -20,3 +20,6 @@ app/release/
 app/api.properties
 /.idea/assetWizardSettings.xml
 .keystore
+/.idea/misc.xml
+/.idea/deploymentTargetDropDown.xml
+/.idea/codeStyles/
