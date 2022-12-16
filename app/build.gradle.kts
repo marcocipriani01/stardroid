@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion(32)
+    compileSdk = 33
     buildToolsVersion = "33.0.0"
 
     defaultConfig {
         applicationId = "io.github.marcocipriani01.telescopetouch"
-        minSdkVersion(21)
-        targetSdkVersion(32)
+        minSdk = 21
+        targetSdk = 33
         versionCode = 38
         versionName = "1.8.8"
         multiDexEnabled = true
@@ -33,6 +33,7 @@ android {
     lint {
         abortOnError = false
     }
+    namespace = "io.github.marcocipriani01.telescopetouch"
 }
 
 dependencies {
@@ -42,14 +43,14 @@ dependencies {
     implementation("com.github.marcocipriani01:GraphView:5.0.1")
     implementation("com.github.marcocipriani01:PhotoView:3.0.4")
 
-    implementation("androidx.appcompat:appcompat:1.4.2")
+    implementation("androidx.appcompat:appcompat:1.5.1")
     implementation("androidx.preference:preference:1.2.0")
-    implementation("androidx.activity:activity:1.4.0")
-    implementation("androidx.fragment:fragment:1.4.1")
+    implementation("androidx.activity:activity:1.6.1")
+    implementation("androidx.fragment:fragment:1.5.5")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
-    implementation("com.google.android.material:material:1.6.1")
+    implementation("com.google.android.material:material:1.7.0")
 
     implementation("com.google.dagger:dagger:2.42")
     implementation("com.google.dagger:dagger-android-support:2.42")
@@ -65,9 +66,9 @@ dependencies {
     implementation("com.jcraft:jsch:0.1.55")
     implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
 
-    implementation("com.google.android.gms:play-services-maps:18.0.2")
-    implementation("com.google.android.gms:play-services-location:20.0.0")
-    implementation("com.google.android.libraries.places:places:2.6.0")
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation("com.google.android.libraries.places:places:3.0.0")
 }
 
 apply(plugin = "com.google.android.gms.oss-licenses-plugin")

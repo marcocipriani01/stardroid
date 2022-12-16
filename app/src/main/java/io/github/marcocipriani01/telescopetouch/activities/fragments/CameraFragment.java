@@ -906,7 +906,11 @@ public class CameraFragment extends ActionFragment implements INDICamera.CameraL
                 INDICamera.SaveMode saveMode = (INDICamera.SaveMode) saveModeSpinner.getSelectedItem();
                 for (INDICamera camera : cameras) {
                     this.cameras.add(camera);
-                    camera.setSaveMode(saveMode);
+                    try {
+                        camera.setSaveMode(saveMode);
+                    } catch (UnsupportedOperationException ignored) {
+
+                    }
                 }
             }
         }
